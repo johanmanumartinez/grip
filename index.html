@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grip — Demo</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --void: #0A0A0F;
+    --onyx: #14141F;
+    --electric: #2D7AF6;
+    --cyan-pulse: #5BA8FF;
+    --white: #F0F0F5;
+    --steel: #8A8FA3;
+    --circuit-green: #34D399;
+    --grid: #1E1E2E;
+    --danger: #EF4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--void);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── BACKGROUND ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(45, 122, 246, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 100%, rgba(45, 122, 246, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── CONTAINER ─── */
+  .container {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 24px 20px 40px;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+  }
+
+  /* ─── SCREENS ─── */
+  .screen {
+    display: none;
+    animation: fadeUp 0.5s ease-out;
+  }
+  .screen.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── LOGO ─── */
+  .logo-wrap {
+    text-align: center;
+    padding: 20px 0 8px;
+  }
+  .logo-wrap img {
+    width: 160px;
+    filter: drop-shadow(0 0 30px rgba(45, 122, 246, 0.15));
+  }
+
+  /* ─── HEADER ─── */
+  .screen-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .screen-header .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--electric);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(45, 122, 246, 0.3);
+  }
+  .screen-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .screen-header h1 span { color: var(--electric); }
+  .screen-header p {
+    font-size: 14px;
+    color: var(--steel);
+    line-height: 1.6;
+  }
+
+  /* ─── FORM CARD ─── */
+  .form-card {
+    background: linear-gradient(135deg, rgba(20, 20, 31, 0.8), rgba(14, 14, 22, 0.9));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(45, 122, 246, 0.1);
+    border-radius: 16px;
+    padding: 4px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(45, 122, 246, 0.03);
+  }
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(45, 122, 246, 0.3), transparent);
+    z-index: 2;
+  }
+  .form-card iframe {
+    border-radius: 12px;
+    width: 100%;
+    min-height: 480px;
+  }
+
+  /* ─── BUTTONS ─── */
+  .btn-primary {
+    display: block;
+    width: 100%;
+    padding: 15px 24px;
+    background: linear-gradient(135deg, var(--electric), #4A90FF);
+    color: #FFF;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(45, 122, 246, 0.25);
+    text-align: center;
+    text-decoration: none;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(45, 122, 246, 0.35), 0 0 20px rgba(45, 122, 246, 0.1);
+  }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-outline {
+    display: block;
+    width: 100%;
+    padding: 15px 24px;
+    background: transparent;
+    color: var(--electric);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border: 1px solid rgba(45, 122, 246, 0.25);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+  .btn-outline:hover {
+    background: rgba(45, 122, 246, 0.06);
+    border-color: rgba(45, 122, 246, 0.4);
+    box-shadow: 0 0 20px rgba(45, 122, 246, 0.08);
+  }
+
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px 24px;
+    background: linear-gradient(135deg, #25D366, #20BD5A);
+    color: #FFF;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.2);
+  }
+  .btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(37, 211, 102, 0.3);
+  }
+
+  /* ─── STARS ─── */
+  .stars-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 28px 0;
+  }
+  .star {
+    width: 52px;
+    height: 52px;
+    background: var(--onyx);
+    border: 1px solid var(--grid);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    font-size: 26px;
+    user-select: none;
+  }
+  .star:hover {
+    border-color: rgba(45, 122, 246, 0.3);
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+  .star.active {
+    background: linear-gradient(135deg, rgba(45, 122, 246, 0.15), rgba(45, 122, 246, 0.05));
+    border-color: var(--electric);
+    box-shadow: 0 0 20px rgba(45, 122, 246, 0.1);
+    transform: scale(1.05);
+  }
+  .star .star-icon { color: var(--steel); transition: color 0.3s ease; }
+  .star.active .star-icon { color: var(--electric); text-shadow: 0 0 10px rgba(45, 122, 246, 0.4); }
+
+  .star-label {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--steel);
+    min-height: 18px;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+  }
+  .star-label.positive { color: var(--circuit-green); }
+  .star-label.negative { color: var(--steel); }
+
+  /* ─── FEEDBACK FORM ─── */
+  .feedback-area {
+    display: none;
+    animation: fadeUp 0.4s ease-out;
+  }
+  .feedback-area.show { display: block; }
+
+  .feedback-area textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--onyx);
+    border: 1px solid var(--grid);
+    border-radius: 10px;
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    resize: none;
+    height: 100px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    margin-bottom: 14px;
+  }
+  .feedback-area textarea:focus {
+    border-color: var(--electric);
+    box-shadow: 0 0 15px rgba(45, 122, 246, 0.08);
+  }
+  .feedback-area textarea::placeholder { color: #444; }
+
+  /* ─── BENEFITS LIST ─── */
+  .benefits {
+    list-style: none;
+    margin: 24px 0;
+  }
+  .benefits li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--grid);
+    font-size: 14px;
+    color: var(--steel);
+  }
+  .benefits li:last-child { border-bottom: none; }
+  .benefits li .icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, rgba(45, 122, 246, 0.1), rgba(45, 122, 246, 0.03));
+    border: 1px solid rgba(45, 122, 246, 0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .benefits li strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* ─── CONTACT CARD ─── */
+  .contact-card {
+    background: linear-gradient(135deg, rgba(20, 20, 31, 0.9), rgba(14, 14, 22, 0.95));
+    border: 1px solid rgba(45, 122, 246, 0.12);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 20px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  }
+  .contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(45, 122, 246, 0.3), transparent);
+  }
+  .contact-card .contact-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    margin-top: 12px;
+  }
+  .contact-card .contact-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--electric);
+    margin-top: 6px;
+    text-shadow: 0 0 10px rgba(45, 122, 246, 0.2);
+  }
+
+  /* ─── NFC PULSE ─── */
+  .nfc-mini {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 6px;
+  }
+  .nfc-mini .dot {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 10px; height: 10px;
+    background: var(--electric);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 12px rgba(45, 122, 246, 0.4);
+  }
+  .nfc-mini .ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    border: 1.5px solid var(--electric);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: nfc-pulse 2s ease-out infinite;
+  }
+  .nfc-mini .ring:nth-child(2) { animation-delay: 0.4s; }
+  .nfc-mini .ring:nth-child(3) { animation-delay: 0.8s; }
+  @keyframes nfc-pulse {
+    0% { width: 10px; height: 10px; opacity: 1; }
+    100% { width: 50px; height: 50px; opacity: 0; }
+  }
+
+  /* ─── FOOTER ─── */
+  .powered {
+    text-align: center;
+    padding: 30px 0 10px;
+  }
+  .powered span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #333;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--grid), transparent);
+    margin: 20px 0;
+  }
+
+  /* ─── SUCCESS CHECK ─── */
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    background: linear-gradient(135deg, rgba(52, 211, 153, 0.15), rgba(52, 211, 153, 0.05));
+    border: 2px solid var(--circuit-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 0 30px rgba(52, 211, 153, 0.15);
+    animation: scaleIn 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  @keyframes scaleIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SCREEN 1: DATOS -->
+<!-- ═══════════════════════════════════════ -->
+<div class="container">
+
+  <div id="screen-1" class="screen active">
+    <div class="logo-wrap">
+      <img src="logo_clean.png" alt="Grip">
+    </div>
+
+    <div class="screen-header">
+      <div class="tag">[conexion activa]</div>
+      <h1>Bienvenido a<br><span id="business-name">Grip Demo</span></h1>
+      <p>Registrate para recibir promociones exclusivas, premios semanales y sorpresas en tu cumpleanos.</p>
+    </div>
+
+    <div class="form-card">
+      <iframe src="https://api.leadconnectorhq.com/widget/survey/gySsDYIwnw2PD82DVzQA" style="border:none;width:100%;min-height:480px;" scrolling="no" id="gySsDYIwnw2PD82DVzQA" title="Formulario Grip"></iframe>
+    </div>
+
+    <button class="btn-primary" onclick="goToScreen(2)">Continuar</button>
+
+    <div class="powered"><span>Powered by Grip</span></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SCREEN 2: REVIEW -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="screen-2" class="screen">
+    <div class="logo-wrap">
+      <img src="logo_clean.png" alt="Grip">
+    </div>
+
+    <div class="screen-header">
+      <div class="tag">[tu opinion]</div>
+      <h1>Como fue tu <span>experiencia</span>?</h1>
+      <p>Tu opinion nos ayuda a mejorar.</p>
+    </div>
+
+    <div class="stars-wrap">
+      <div class="star" data-value="1" onclick="selectStar(1)"><span class="star-icon">&#9733;</span></div>
+      <div class="star" data-value="2" onclick="selectStar(2)"><span class="star-icon">&#9733;</span></div>
+      <div class="star" data-value="3" onclick="selectStar(3)"><span class="star-icon">&#9733;</span></div>
+      <div class="star" data-value="4" onclick="selectStar(4)"><span class="star-icon">&#9733;</span></div>
+      <div class="star" data-value="5" onclick="selectStar(5)"><span class="star-icon">&#9733;</span></div>
+    </div>
+
+    <div class="star-label" id="star-label"></div>
+
+    <!-- POSITIVE: 4-5 stars → Google -->
+    <div id="review-positive" class="feedback-area">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div class="success-icon">&#10003;</div>
+        <p style="color: var(--circuit-green); font-weight: 500; font-size: 15px;">Nos alegra que te haya gustado!</p>
+        <p style="color: var(--steel); font-size: 13px; margin-top: 6px;">Compartelo en Google para que otros lo descubran.</p>
+      </div>
+      <!-- PLACEHOLDER: reemplazar con link real de Google My Business -->
+      <a href="https://g.page/GRIP_PLACEHOLDER/review" target="_blank" class="btn-primary" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Dejar resena en Google
+      </a>
+      <button class="btn-outline" onclick="goToScreen(3)">Continuar</button>
+    </div>
+
+    <!-- NEGATIVE: 1-3 stars → Internal -->
+    <div id="review-negative" class="feedback-area">
+      <textarea placeholder="Cuentanos que podemos mejorar..." id="feedback-text"></textarea>
+      <button class="btn-primary" onclick="submitFeedback()">Enviar feedback</button>
+    </div>
+
+    <div class="powered"><span>Powered by Grip</span></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SCREEN 3: GUARDAR CONTACTO -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="screen-3" class="screen">
+    <div class="logo-wrap">
+      <img src="logo_clean.png" alt="Grip">
+    </div>
+
+    <div class="screen-header">
+      <div class="tag">[seccion premium]</div>
+      <h1>Estas dentro <span>!</span></h1>
+      <p>Guarda nuestro contacto para no perderte nada.</p>
+    </div>
+
+    <div class="contact-card">
+      <div class="nfc-mini">
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="dot"></div>
+      </div>
+      <div class="contact-name" id="contact-business-name">Grip Demo</div>
+      <!-- PLACEHOLDER: reemplazar con numero real -->
+      <div class="contact-number">+58 412 000 0000</div>
+    </div>
+
+    <ul class="benefits">
+      <li>
+        <div class="icon">&#127881;</div>
+        <div><strong>Sorpresa de cumpleanos</strong><br>Un regalo especial en tu dia</div>
+      </li>
+      <li>
+        <div class="icon">&#127942;</div>
+        <div><strong>Premios semanales</strong><br>Promociones exclusivas cada semana</div>
+      </li>
+      <li>
+        <div class="icon">&#9889;</div>
+        <div><strong>Acceso prioritario</strong><br>Enterate primero de todo lo nuevo</div>
+      </li>
+    </ul>
+
+    <!-- PLACEHOLDER: reemplazar con numero real del negocio -->
+    <a href="https://wa.me/584120000000?text=Hola!%20Quiero%20guardar%20este%20contacto" target="_blank" class="btn-whatsapp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Guardar contacto en WhatsApp
+    </a>
+
+    <div class="divider"></div>
+
+    <div style="text-align: center;">
+      <p style="font-size: 13px; color: var(--steel); margin-bottom: 4px;">Gracias por ser parte.</p>
+      <p style="font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: var(--white);">Nos vemos pronto.</p>
+    </div>
+
+    <div class="powered"><span>Powered by Grip</span></div>
+  </div>
+
+</div>
+
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
+<script>
+  // ─── CONFIG (editar para cada negocio) ───
+  const CONFIG = {
+    businessName: 'Grip Demo',
+    whatsappNumber: '584120000000', // sin + ni espacios
+    whatsappDisplay: '+58 412 000 0000',
+    googleReviewUrl: 'https://g.page/GRIP_PLACEHOLDER/review' // reemplazar
+  };
+
+  // Apply config
+  document.getElementById('business-name').textContent = CONFIG.businessName;
+  document.getElementById('contact-business-name').textContent = CONFIG.businessName;
+  document.querySelector('.contact-number').textContent = CONFIG.whatsappDisplay;
+  document.querySelector('.btn-whatsapp').href = 'https://wa.me/' + CONFIG.whatsappNumber + '?text=Hola!%20Quiero%20guardar%20este%20contacto';
+  document.querySelector('#review-positive a.btn-primary').href = CONFIG.googleReviewUrl;
+
+  // ─── NAVIGATION ───
+  function goToScreen(n) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + n).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ─── STARS ───
+  let selectedStars = 0;
+  const labels = {
+    1: 'Muy mala',
+    2: 'Mala',
+    3: 'Regular',
+    4: 'Buena',
+    5: 'Excelente!'
+  };
+
+  function selectStar(value) {
+    selectedStars = value;
+    const stars = document.querySelectorAll('.star');
+    stars.forEach((star, i) => {
+      if (i < value) {
+        star.classList.add('active');
+      } else {
+        star.classList.remove('active');
+      }
+    });
+
+    const label = document.getElementById('star-label');
+    label.textContent = labels[value];
+    label.className = 'star-label ' + (value >= 4 ? 'positive' : 'negative');
+
+    // Show appropriate feedback
+    const positive = document.getElementById('review-positive');
+    const negative = document.getElementById('review-negative');
+
+    if (value >= 4) {
+      positive.classList.add('show');
+      negative.classList.remove('show');
+    } else {
+      negative.classList.add('show');
+      positive.classList.remove('show');
+    }
+  }
+
+  // ─── SUBMIT FEEDBACK (negative) ───
+  function submitFeedback() {
+    const text = document.getElementById('feedback-text').value;
+    // TODO: enviar a GHL via webhook n8n
+    console.log('Feedback negativo:', selectedStars, 'estrellas -', text);
+    goToScreen(3);
+  }
+</script>
+
+</body>
+</html>
