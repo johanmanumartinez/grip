@@ -129,7 +129,7 @@
   .form-card iframe {
     border-radius: 12px;
     width: 100%;
-    min-height: 480px;
+    min-height: 380px;
   }
 
   /* ─── BUTTONS ─── */
@@ -444,10 +444,8 @@
     </div>
 
     <div class="form-card">
-      <iframe src="https://api.leadconnectorhq.com/widget/survey/gySsDYIwnw2PD82DVzQA" style="border:none;width:100%;min-height:480px;" scrolling="no" id="gySsDYIwnw2PD82DVzQA" title="Formulario Grip"></iframe>
+      <iframe src="https://api.leadconnectorhq.com/widget/survey/gySsDYIwnw2PD82DVzQA" style="border:none;width:100%;" scrolling="no" id="gySsDYIwnw2PD82DVzQA" title="Formulario Grip"></iframe>
     </div>
-
-    <button class="btn-primary" onclick="goToScreen(2)">Continuar</button>
 
     <div class="powered"><span>Powered by Grip</span></div>
   </div>
@@ -564,8 +562,8 @@
   // ─── CONFIG (editar para cada negocio) ───
   const CONFIG = {
     businessName: 'Grip Demo',
-    whatsappNumber: '584120000000', // sin + ni espacios
-    whatsappDisplay: '+58 412 000 0000',
+    whatsappNumber: '584141932869', // sin + ni espacios
+    whatsappDisplay: '+58 414 193 2869',
     googleReviewUrl: 'https://g.page/GRIP_PLACEHOLDER/review' // reemplazar
   };
 
@@ -581,6 +579,48 @@
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById('screen-' + n).classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ─── AUTO-DETECT FORM COMPLETION ───
+  // Listen for GHL postMessage when survey is completed
+  window.addEventListener('message', function(event) {
+    // GHL sends messages when form/survey is submitted
+    if (event.data && typeof event.data === 'string') {
+      try {
+        var data = JSON.parse(event.data);
+        if (data.type === 'form-submitted' || data.type === 'survey-submitted' || data.action === 'formSubmitted') {
+          setTimeout(function() { goToScreen(2); }, 800);
+        }
+      } catch(e) {}
+    }
+    // Also check for object messages
+    if (event.data && typeof event.data === 'object') {
+      if (event.data.type === 'form-submitted' || event.data.type === 'survey-submitted' || event.data.action === 'formSubmitted') {
+        setTimeout(function() { goToScreen(2); }, 800);
+      }
+    }
+  });
+
+  // Fallback: observe iframe height changes (GHL resizes iframe on completion)
+  var formCompleted = false;
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      if (m.type === 'attributes' && m.attributeName === 'style' && !formCompleted) {
+        var iframe = document.getElementById('gySsDYIwnw2PD82DVzQA');
+        if (iframe) {
+          var h = parseInt(iframe.style.height);
+          // GHL thank you screen is typically shorter
+          if (h > 0 && h < 250) {
+            formCompleted = true;
+            setTimeout(function() { goToScreen(2); }, 1200);
+          }
+        }
+      }
+    });
+  });
+  var iframeEl = document.getElementById('gySsDYIwnw2PD82DVzQA');
+  if (iframeEl) {
+    observer.observe(iframeEl, { attributes: true, attributeFilter: ['style'] });
   }
 
   // ─── STARS ───
