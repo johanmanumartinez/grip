@@ -481,13 +481,24 @@
   </div>
 
   <div class="input-card">
-    <div class="input-label">Mensajes por mes</div>
-    <div class="input-desc">Promos, cumpleanos, reactivacion</div>
+    <div class="input-label">Promociones por mes</div>
+    <div class="input-desc">Ofertas, 2x1, dias especiales</div>
     <div class="input-row">
       <div class="slider-wrap">
-        <input type="range" id="msgs" min="1" max="12" value="4" oninput="calc()">
+        <input type="range" id="promos" min="0" max="8" value="3" oninput="calc()">
       </div>
-      <div class="slider-value"><span id="msgs-val">4</span> <span class="unit">envios</span></div>
+      <div class="slider-value"><span id="promos-val">3</span> <span class="unit">envios</span></div>
+    </div>
+  </div>
+
+  <div class="input-card">
+    <div class="input-label">Reactivaciones por mes</div>
+    <div class="input-desc">Mensajes a clientes que no vuelven hace tiempo</div>
+    <div class="input-row">
+      <div class="slider-wrap">
+        <input type="range" id="reacts" min="0" max="4" value="1" oninput="calc()">
+      </div>
+      <div class="slider-value"><span id="reacts-val">1</span> <span class="unit">envios</span></div>
     </div>
   </div>
 
@@ -556,8 +567,12 @@
       <span class="bv" id="b-grip">$50</span>
     </div>
     <div class="breakdown-row">
-      <span class="bl">WhatsApp API (lo pagas tu)</span>
+      <span class="bl">WhatsApp API — promos + reactivacion</span>
       <span class="bv" id="b-wa">$73</span>
+    </div>
+    <div class="breakdown-row">
+      <span class="bl">WhatsApp API — cumpleanos (auto)</span>
+      <span class="bv" id="b-wa-bday">$2</span>
     </div>
     <div class="breakdown-row">
       <span class="bl">Total inversion</span>
@@ -575,9 +590,8 @@
   </div>
 
   <div class="disclaimer">
-    Estimacion basada en una tasa de retorno del 20% sobre contactos alcanzados.
-    Tasa de captacion estimada: 30% de clientes diarios.
-    Costo WhatsApp API: $0.085/msg (tarifa Rest of Latin America, Oct 2026).
+    Tasa de captacion: 30%. Retorno por promos: 20%, reactivacion: 10%, cumpleanos: 35%.
+    Cumpleanos auto-calculado (~8% de la base/mes). WhatsApp API: $0.085/msg (LATAM).
     Resultados reales pueden variar.
   </div>
 
@@ -589,37 +603,51 @@
   const GRIP_MONTHLY = 50;
   const WA_COST_PER_MSG = 0.085; // Rest of Latin America
   const CAPTURE_RATE = 0.30; // 30% de clientes dejan datos
-  const RETURN_RATE = 0.20; // 20% vuelven por los mensajes
-  const MONTHS = 3; // Proyeccion a 3 meses
+  const RETURN_RATE_PROMO = 0.20; // 20% vuelven por promos
+  const RETURN_RATE_REACT = 0.10; // 10% vuelven por reactivacion
+  const BDAY_RATE = 1 / 12; // ~8.3% de la base tiene cumple cada mes
+  const BDAY_RETURN_RATE = 0.35; // 35% vuelven por cumpleanos (mas personal)
+  const MONTHS = 3;
 
   function calc() {
     const ticket = parseInt(document.getElementById('ticket').value);
     const clientsDay = parseInt(document.getElementById('clients').value);
     const daysWeek = parseInt(document.getElementById('days').value);
-    const msgsMonth = parseInt(document.getElementById('msgs').value);
+    const promos = parseInt(document.getElementById('promos').value);
+    const reacts = parseInt(document.getElementById('reacts').value);
 
     // Update displays
     document.getElementById('ticket-val').textContent = ticket;
     document.getElementById('clients-val').textContent = clientsDay;
     document.getElementById('days-val').textContent = daysWeek;
-    document.getElementById('msgs-val').textContent = msgsMonth;
+    document.getElementById('promos-val').textContent = promos;
+    document.getElementById('reacts-val').textContent = reacts;
 
-    // Calc contacts (accumulated over 3 months)
-    const clientsMonth = clientsDay * daysWeek * 4.3; // clients per month
+    // Contacts accumulated over 3 months
+    const clientsMonth = clientsDay * daysWeek * 4.3;
     const newContactsMonth = Math.round(clientsMonth * CAPTURE_RATE);
-    const totalContacts = newContactsMonth * MONTHS; // accumulated
+    const totalContacts = newContactsMonth * MONTHS;
 
-    // WhatsApp cost (month 3 — sending to full base)
-    const totalMessages = totalContacts * msgsMonth;
-    const waCost = totalMessages * WA_COST_PER_MSG;
+    // Messages month 3 (sending to full base)
+    const promoMsgs = totalContacts * promos;
+    const reactMsgs = totalContacts * reacts;
+    const bdayMsgs = Math.round(totalContacts * BDAY_RATE); // auto
+    const totalMsgs = promoMsgs + reactMsgs + bdayMsgs;
 
-    // Returns
-    const contactsReached = totalContacts; // sending to all
-    const clientsReturn = Math.round(contactsReached * RETURN_RATE);
+    // WhatsApp costs split
+    const waCostPromoReact = (promoMsgs + reactMsgs) * WA_COST_PER_MSG;
+    const waCostBday = bdayMsgs * WA_COST_PER_MSG;
+    const waCostTotal = waCostPromoReact + waCostBday;
+
+    // Returns (each channel has its own rate)
+    const returnsPromo = Math.round(totalContacts * promos * RETURN_RATE_PROMO);
+    const returnsReact = Math.round(totalContacts * reacts * RETURN_RATE_REACT);
+    const returnsBday = Math.round(bdayMsgs * BDAY_RETURN_RATE);
+    const clientsReturn = returnsPromo + returnsReact + returnsBday;
     const revenue = clientsReturn * ticket;
 
     // Totals
-    const totalInvestment = GRIP_MONTHLY + waCost;
+    const totalInvestment = GRIP_MONTHLY + waCostTotal;
     const profit = revenue - totalInvestment;
     const roi = totalInvestment > 0 ? revenue / totalInvestment : 0;
 
@@ -627,7 +655,7 @@
     document.getElementById('r-contacts').textContent = totalContacts.toLocaleString();
     document.getElementById('r-return').textContent = clientsReturn.toLocaleString();
     document.getElementById('r-revenue').textContent = '$' + revenue.toLocaleString();
-    document.getElementById('r-wacost').textContent = '$' + Math.round(waCost).toLocaleString();
+    document.getElementById('r-wacost').textContent = '$' + Math.round(waCostTotal).toLocaleString();
 
     // ROI
     document.getElementById('r-roi').textContent = roi.toFixed(1) + 'x';
@@ -644,7 +672,8 @@
 
     // Breakdown
     document.getElementById('b-grip').textContent = '$' + GRIP_MONTHLY;
-    document.getElementById('b-wa').textContent = '$' + Math.round(waCost).toLocaleString();
+    document.getElementById('b-wa').textContent = '$' + Math.round(waCostPromoReact).toLocaleString();
+    document.getElementById('b-wa-bday').textContent = '$' + Math.round(waCostBday).toLocaleString();
     document.getElementById('b-total-inv').textContent = '$' + Math.round(totalInvestment).toLocaleString();
     document.getElementById('b-profit').textContent = (profit >= 0 ? '+' : '') + '$' + Math.round(profit).toLocaleString();
 
