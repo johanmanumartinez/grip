@@ -20,6 +20,7 @@
     --circuit-green: #34D399;
     --grid: #1E1E2E;
     --danger: #EF4444;
+    --amber: #F59E0B;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,14 +45,14 @@
   }
 
   .container {
-    max-width: 480px;
+    max-width: 520px;
     margin: 0 auto;
     padding: 24px 20px 60px;
     position: relative;
     z-index: 1;
   }
 
-  /* ─── HEADER ─── */
+  /* --- HEADER --- */
   .logo-wrap {
     text-align: center;
     padding: 16px 0 8px;
@@ -88,7 +89,7 @@
     line-height: 1.6;
   }
 
-  /* ─── SECTION ─── */
+  /* --- SECTION --- */
   .section-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
@@ -99,7 +100,7 @@
     text-shadow: 0 0 8px rgba(45,122,246,0.2);
   }
 
-  /* ─── INPUT CARD ─── */
+  /* --- INPUT CARD --- */
   .input-card {
     background: linear-gradient(135deg, rgba(20,20,31,0.8), rgba(14,14,22,0.9));
     border: 1px solid rgba(45,122,246,0.1);
@@ -190,14 +191,130 @@
     font-weight: 500;
   }
 
-  /* ─── DIVIDER ─── */
+  /* --- DIVIDER --- */
   .divider {
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--grid), transparent);
     margin: 24px 0;
   }
 
-  /* ─── RESULTS ─── */
+  /* --- SCENARIO TABS --- */
+  .scenario-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .scenario-tab {
+    flex: 1;
+    padding: 10px 8px;
+    border-radius: 10px;
+    border: 1px solid var(--grid);
+    background: rgba(14,14,22,0.6);
+    color: var(--steel);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .scenario-tab:hover {
+    border-color: rgba(45,122,246,0.2);
+    color: var(--white);
+  }
+  .scenario-tab.active-pessimist {
+    border-color: var(--amber);
+    color: var(--amber);
+    background: rgba(245,158,11,0.08);
+    box-shadow: 0 0 15px rgba(245,158,11,0.08);
+  }
+  .scenario-tab.active-standard {
+    border-color: var(--electric);
+    color: var(--electric);
+    background: rgba(45,122,246,0.08);
+    box-shadow: 0 0 15px rgba(45,122,246,0.08);
+  }
+  .scenario-tab.active-optimist {
+    border-color: var(--circuit-green);
+    color: var(--circuit-green);
+    background: rgba(52,211,153,0.08);
+    box-shadow: 0 0 15px rgba(52,211,153,0.08);
+  }
+
+  /* --- EXPLANATION CARD --- */
+  .explain-card {
+    background: linear-gradient(135deg, rgba(20,20,31,0.7), rgba(14,14,22,0.85));
+    border: 1px solid rgba(45,122,246,0.08);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+  .explain-card .explain-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--electric);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .explain-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 6px 0;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(30,30,46,0.4);
+  }
+  .explain-row:last-child { border-bottom: none; }
+  .explain-row .el {
+    color: var(--steel);
+    flex: 1;
+    line-height: 1.5;
+  }
+  .explain-row .ev {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--white);
+    font-size: 12px;
+    text-align: right;
+    min-width: 90px;
+    line-height: 1.5;
+  }
+  .explain-row .ev.green { color: var(--circuit-green); }
+  .explain-row .ev.blue { color: var(--electric); }
+  .explain-row .ev.amber { color: var(--amber); }
+
+  .explain-row.subtotal {
+    border-top: 1px solid var(--grid);
+    margin-top: 4px;
+    padding-top: 10px;
+  }
+  .explain-row.subtotal .el { color: var(--white); font-weight: 500; }
+
+  .explain-note {
+    font-size: 10px;
+    color: #555;
+    margin-top: 8px;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .rate-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 4px;
+  }
+  .rate-badge.pessimist { background: rgba(245,158,11,0.12); color: var(--amber); }
+  .rate-badge.standard { background: rgba(45,122,246,0.12); color: var(--electric); }
+  .rate-badge.optimist { background: rgba(52,211,153,0.12); color: var(--circuit-green); }
+
+  /* --- RESULTS --- */
   .results-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -257,7 +374,7 @@
 
   .result-card.danger .result-value { color: var(--steel); }
 
-  /* ─── ROI HERO ─── */
+  /* --- ROI HERO --- */
   .roi-hero {
     background: linear-gradient(135deg, rgba(20,20,31,0.9), rgba(10,10,15,0.95));
     border: 1px solid rgba(52,211,153,0.15);
@@ -316,7 +433,7 @@
     font-weight: 600;
   }
 
-  /* ─── COMPARISON BAR ─── */
+  /* --- COMPARISON BAR --- */
   .comparison {
     margin: 20px 0;
   }
@@ -359,35 +476,7 @@
     box-shadow: 0 0 20px rgba(52,211,153,0.08);
   }
 
-  /* ─── BREAKDOWN ─── */
-  .breakdown {
-    background: linear-gradient(135deg, rgba(20,20,31,0.7), rgba(14,14,22,0.85));
-    border: 1px solid rgba(45,122,246,0.08);
-    border-radius: 14px;
-    padding: 18px;
-    margin: 14px 0;
-  }
-  .breakdown-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(30,30,46,0.5);
-    font-size: 13px;
-  }
-  .breakdown-row:last-child { border-bottom: none; }
-  .breakdown-row .bl { color: var(--steel); }
-  .breakdown-row .bv {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 600;
-    color: var(--white);
-    font-size: 13px;
-  }
-  .breakdown-row.total { padding-top: 12px; margin-top: 4px; border-top: 1px solid var(--grid); }
-  .breakdown-row.total .bl { color: var(--white); font-weight: 600; }
-  .breakdown-row.total .bv { color: var(--circuit-green); font-size: 15px; text-shadow: 0 0 8px rgba(52,211,153,0.2); }
-
-  /* ─── PITCH LINE ─── */
+  /* --- PITCH LINE --- */
   .pitch {
     background: linear-gradient(135deg, rgba(20,20,31,0.9), rgba(10,10,15,0.95));
     border: 1px solid rgba(45,122,246,0.12);
@@ -408,7 +497,7 @@
   .pitch p span { color: var(--electric); }
   .pitch p .green { color: var(--circuit-green); }
 
-  /* ─── FOOTER ─── */
+  /* --- FOOTER --- */
   .powered {
     text-align: center;
     padding: 30px 0 10px;
@@ -421,7 +510,6 @@
     text-transform: uppercase;
   }
 
-  /* ─── DISCLAIMER ─── */
   .disclaimer {
     font-size: 10px;
     color: #444;
@@ -442,10 +530,10 @@
   <div class="page-header">
     <div class="tag">[calculadora roi]</div>
     <h1>Cuanto <span>ganas</span> con Grip?</h1>
-    <p>Ajusta los datos de tu negocio y mira el retorno real.</p>
+    <p>Ajusta los datos de tu negocio y mira el retorno real, con numeros transparentes.</p>
   </div>
 
-  <!-- ─── INPUTS ─── -->
+  <!-- INPUTS -->
   <div class="section-label">[tu negocio]</div>
 
   <div class="input-card">
@@ -461,7 +549,7 @@
 
   <div class="input-card">
     <div class="input-label">Clientes por dia</div>
-    <div class="input-desc">Promedio de personas que entran al local</div>
+    <div class="input-desc">Promedio de personas que entran al local (nuevos + repetidos)</div>
     <div class="input-row">
       <div class="slider-wrap">
         <input type="range" id="clients" min="5" max="200" value="40" oninput="calc()">
@@ -480,9 +568,11 @@
     </div>
   </div>
 
+  <div class="section-label" style="margin-top:20px">[tus envios]</div>
+
   <div class="input-card">
     <div class="input-label">Promociones por mes</div>
-    <div class="input-desc">Ofertas, 2x1, dias especiales</div>
+    <div class="input-desc">Ofertas, 2x1, dias especiales — se envian a toda la base</div>
     <div class="input-row">
       <div class="slider-wrap">
         <input type="range" id="promos" min="0" max="8" value="3" oninput="calc()">
@@ -493,7 +583,7 @@
 
   <div class="input-card">
     <div class="input-label">Reactivaciones por mes</div>
-    <div class="input-desc">Mensajes a clientes que no vuelven hace tiempo</div>
+    <div class="input-desc">Mensajes a clientes que no vuelven hace +30 dias</div>
     <div class="input-row">
       <div class="slider-wrap">
         <input type="range" id="reacts" min="0" max="4" value="1" oninput="calc()">
@@ -503,11 +593,22 @@
   </div>
 
   <div class="input-card">
+    <div class="input-label">Costo del incentivo / regalo</div>
+    <div class="input-desc">Postre, bebida, descuento — lo que "regalas" para que vuelvan. Se aplica a cada cliente que vuelve.</div>
+    <div class="input-row">
+      <div class="slider-wrap">
+        <input type="range" id="gift" min="0" max="20" value="3" step="0.5" oninput="calc()">
+      </div>
+      <div class="slider-value">$<span id="gift-val">3</span></div>
+    </div>
+  </div>
+
+  <div class="input-card">
     <div class="input-label">Cumpleanos por mes</div>
     <div class="input-desc">Estimado segun tu base — ajustalo si quieres</div>
     <div class="input-row">
       <div class="slider-wrap">
-        <input type="range" id="bdays" min="0" max="80" value="5" oninput="calc()">
+        <input type="range" id="bdays" min="0" max="80" value="5" oninput="onBdayInput()">
       </div>
       <div class="slider-value"><span id="bdays-val">5</span> <span class="unit">envios</span></div>
     </div>
@@ -516,95 +617,260 @@
 
   <div class="divider"></div>
 
-  <!-- ─── RESULTS ─── -->
+  <!-- SCENARIO -->
+  <div class="section-label">[escenario]</div>
+
+  <div class="scenario-tabs">
+    <div class="scenario-tab" id="tab-pessimist" onclick="setScenario('pessimist')">Pesimista</div>
+    <div class="scenario-tab active-standard" id="tab-standard" onclick="setScenario('standard')">Estandar</div>
+    <div class="scenario-tab" id="tab-optimist" onclick="setScenario('optimist')">Optimista</div>
+  </div>
+
+  <!-- FUNNEL: CONTACTS -->
+  <div class="section-label">[como se calculan tus contactos]</div>
+
+  <div class="explain-card" id="funnel-card">
+    <div class="explain-title">Funnel de captacion — mes 3</div>
+    <div class="explain-row">
+      <span class="el">Visitas totales/mes</span>
+      <span class="ev" id="f-visits">1,032</span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Visitantes repetidos <span class="rate-badge standard" id="badge-repeat">40%</span></span>
+      <span class="ev" id="f-repeats">-413</span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Visitantes nuevos/mes</span>
+      <span class="ev blue" id="f-new">619</span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Tasa de registro <span class="rate-badge standard" id="badge-capture">30%</span></span>
+      <span class="ev" id="f-registered">186</span>
+    </div>
+    <div class="explain-row subtotal">
+      <span class="el">Contactos acumulados (3 meses)</span>
+      <span class="ev blue" id="f-total">557</span>
+    </div>
+    <div class="explain-note" id="f-note">
+      De 40 clientes/dia, ~40% ya vinieron antes. De los 24 nuevos, ~30% dejan sus datos via NFC/QR. En 3 meses acumulas 557 contactos unicos.
+    </div>
+  </div>
+
+  <!-- RESULTS GRID -->
   <div class="section-label">[proyeccion mes 3]</div>
 
   <div class="results-grid">
     <div class="result-card blue">
       <div class="result-label">Contactos</div>
-      <div class="result-value" id="r-contacts">216</div>
+      <div class="result-value" id="r-contacts">557</div>
       <div class="result-sub">en tu base de datos</div>
     </div>
     <div class="result-card">
       <div class="result-label">Clientes que vuelven</div>
-      <div class="result-value" id="r-return">43</div>
+      <div class="result-value" id="r-return">343</div>
       <div class="result-sub">por tus mensajes</div>
     </div>
     <div class="result-card green">
       <div class="result-label">Ingreso extra</div>
-      <div class="result-value" id="r-revenue">$648</div>
+      <div class="result-value" id="r-revenue">$5,145</div>
       <div class="result-sub">ventas adicionales</div>
     </div>
     <div class="result-card danger">
       <div class="result-label">Costo WhatsApp</div>
-      <div class="result-value" id="r-wacost">$73</div>
-      <div class="result-sub">lo pagas directo a Meta</div>
+      <div class="result-value" id="r-wacost">$161</div>
+      <div class="result-sub">conversaciones API</div>
     </div>
   </div>
 
-  <!-- ─── ROI HERO ─── -->
+  <!-- RETURN BREAKDOWN -->
+  <div class="section-label">[quienes vuelven y por que]</div>
+
+  <div class="explain-card">
+    <div class="explain-title">Retorno por canal</div>
+
+    <div class="explain-row">
+      <span class="el">Promos enviadas (base x envios)</span>
+      <span class="ev" id="ret-promo-sent">1,671</span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Tasa de retorno promos <span class="rate-badge standard" id="badge-ret-promo">20%</span></span>
+      <span class="ev green" id="ret-promo-back">334</span>
+    </div>
+
+    <div class="explain-row" style="margin-top:8px">
+      <span class="el">Reactivaciones enviadas</span>
+      <span class="ev" id="ret-react-sent">557</span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Tasa de retorno react. <span class="rate-badge standard" id="badge-ret-react">10%</span></span>
+      <span class="ev green" id="ret-react-back">56</span>
+    </div>
+
+    <div class="explain-row" style="margin-top:8px">
+      <span class="el">Cumpleanos enviados</span>
+      <span class="ev" id="ret-bday-sent">5</span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Tasa de retorno cumple. <span class="rate-badge standard" id="badge-ret-bday">35%</span></span>
+      <span class="ev green" id="ret-bday-back">2</span>
+    </div>
+
+    <div class="explain-row subtotal">
+      <span class="el">Total clientes que vuelven</span>
+      <span class="ev green" id="ret-total">392</span>
+    </div>
+    <div class="explain-row subtotal">
+      <span class="el">Ingreso bruto (vuelven x ticket)</span>
+      <span class="ev" id="ret-revenue-gross">$5,880</span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Costo incentivos (vuelven x regalo)</span>
+      <span class="ev amber" id="ret-gift-cost">-$1,176</span>
+    </div>
+    <div class="explain-row subtotal">
+      <span class="el">Ingreso neto por retorno</span>
+      <span class="ev green" id="ret-revenue">$4,704</span>
+    </div>
+    <div class="explain-note" id="ret-note">
+      No todos los que reciben tu mensaje vuelven. En escenario estandar: 20% vuelven por promos (buen incentivo), 10% por reactivacion (mas frio), 35% por cumpleanos (personal, alta conversion).
+    </div>
+  </div>
+
+  <!-- WHATSAPP COSTS -->
+  <div class="section-label">[costo whatsapp detallado]</div>
+
+  <div class="explain-card">
+    <div class="explain-title">Conversaciones WhatsApp API — mes 3</div>
+
+    <div class="explain-row">
+      <span class="el">Promos: <span id="wa-promo-conv">1,671</span> conversaciones</span>
+      <span class="ev" id="wa-promo-cost">$143</span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Reactivacion: <span id="wa-react-conv">557</span> conversaciones</span>
+      <span class="ev" id="wa-react-cost">$48</span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Cumpleanos: <span id="wa-bday-conv">5</span> conversaciones</span>
+      <span class="ev" id="wa-bday-cost">$0</span>
+    </div>
+
+    <div class="explain-row subtotal">
+      <span class="el">Total conversaciones</span>
+      <span class="ev" id="wa-total-conv">2,233</span>
+    </div>
+    <div class="explain-row subtotal">
+      <span class="el">Costo total WhatsApp</span>
+      <span class="ev" id="wa-total-cost">$192</span>
+    </div>
+
+    <div class="explain-note">
+      WhatsApp Business API cobra por conversacion, no por mensaje. Cada envio (promo, cumpleanos, reactivacion) abre 1 conversacion de 24 horas. Dentro de esa ventana puedes enviar texto + imagen + lo que necesites, sin costo extra. Tarifa marketing: $0.0858/conversacion (Rest of Latin America, Meta 2026).
+    </div>
+  </div>
+
+  <!-- ROI HERO -->
   <div class="roi-hero">
     <div class="roi-label">Retorno de inversion</div>
     <div class="roi-value" id="r-roi">5.3x</div>
     <div class="roi-sub">Por cada <strong>$1</strong> que inviertes, recuperas <strong>$<span id="r-roi-dollar">5.30</span></strong></div>
   </div>
 
-  <!-- ─── COMPARISON BARS ─── -->
+  <!-- COMPARISON BARS -->
   <div class="comparison">
     <div class="comp-label">
       <span>Inversion total</span>
-      <span id="comp-invest-label">$122</span>
+      <span id="comp-invest-label">$242</span>
     </div>
     <div class="comp-bar-wrap">
-      <div class="comp-bar invest" id="bar-invest" style="width: 15%;">
-      </div>
+      <div class="comp-bar invest" id="bar-invest" style="width: 15%;"></div>
     </div>
 
     <div class="comp-label" style="margin-top: 10px;">
       <span>Ingreso extra generado</span>
-      <span id="comp-revenue-label" style="color: var(--circuit-green);">$648</span>
+      <span id="comp-revenue-label" style="color: var(--circuit-green);">$5,880</span>
     </div>
     <div class="comp-bar-wrap">
-      <div class="comp-bar revenue" id="bar-revenue" style="width: 80%;">
-      </div>
+      <div class="comp-bar revenue" id="bar-revenue" style="width: 80%;"></div>
     </div>
   </div>
 
-  <!-- ─── BREAKDOWN ─── -->
-  <div class="section-label">[desglose mensual]</div>
+  <!-- FINAL BREAKDOWN -->
+  <div class="section-label">[resumen de inversion]</div>
 
-  <div class="breakdown">
-    <div class="breakdown-row">
-      <span class="bl">Grip (plataforma + soporte)</span>
-      <span class="bv" id="b-grip">$50</span>
+  <div class="explain-card">
+    <div class="explain-row">
+      <span class="el">Grip (plataforma + soporte)</span>
+      <span class="ev" id="b-grip">$50</span>
     </div>
-    <div class="breakdown-row">
-      <span class="bl">WhatsApp API — promos + reactivacion</span>
-      <span class="bv" id="b-wa">$73</span>
+    <div class="explain-row">
+      <span class="el">WhatsApp API (lo pagas directo a Meta)</span>
+      <span class="ev" id="b-wa">$192</span>
     </div>
-    <div class="breakdown-row">
-      <span class="bl">WhatsApp API — cumpleanos (auto)</span>
-      <span class="bv" id="b-wa-bday">$2</span>
+    <div class="explain-row">
+      <span class="el">Incentivos regalados (postres, bebidas, etc.)</span>
+      <span class="ev" id="b-gifts">$1,176</span>
     </div>
-    <div class="breakdown-row">
-      <span class="bl">Total inversion</span>
-      <span class="bv" id="b-total-inv">$123</span>
+    <div class="explain-row subtotal">
+      <span class="el">Total inversion mensual</span>
+      <span class="ev" id="b-total-inv">$242</span>
     </div>
-    <div class="breakdown-row total">
-      <span class="bl">Ganancia neta</span>
-      <span class="bv" id="b-profit">+$525</span>
+    <div class="explain-row subtotal">
+      <span class="el">Ingreso extra generado</span>
+      <span class="ev green" id="b-revenue">$5,880</span>
+    </div>
+    <div class="explain-row subtotal">
+      <span class="el">Ganancia neta</span>
+      <span class="ev green" id="b-profit" style="font-size:15px">+$5,638</span>
     </div>
   </div>
 
-  <!-- ─── PITCH ─── -->
+  <!-- PITCH -->
   <div class="pitch">
-    <p>"Inviertes <span id="pitch-invest">$123</span>, recuperas <span class="green" id="pitch-revenue">$648</span>. Eso es <span id="pitch-roi">5.3x</span> tu inversion."</p>
+    <p>"Inviertes <span id="pitch-invest">$242</span>, recuperas <span class="green" id="pitch-revenue">$5,880</span>. Eso es <span id="pitch-roi">5.3x</span> tu inversion."</p>
+  </div>
+
+  <!-- SCENARIO RATES TABLE -->
+  <div class="section-label">[tasas por escenario]</div>
+
+  <div class="explain-card">
+    <div class="explain-title">De donde salen los porcentajes</div>
+
+    <div class="explain-row">
+      <span class="el">Visitantes repetidos</span>
+      <span class="ev"><span class="rate-badge pessimist">50%</span> <span class="rate-badge standard">40%</span> <span class="rate-badge optimist">30%</span></span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Registro via NFC/QR</span>
+      <span class="ev"><span class="rate-badge pessimist">15%</span> <span class="rate-badge standard">30%</span> <span class="rate-badge optimist">45%</span></span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Retorno por promo</span>
+      <span class="ev"><span class="rate-badge pessimist">8%</span> <span class="rate-badge standard">20%</span> <span class="rate-badge optimist">35%</span></span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Retorno por reactivacion</span>
+      <span class="ev"><span class="rate-badge pessimist">5%</span> <span class="rate-badge standard">10%</span> <span class="rate-badge optimist">18%</span></span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Retorno por cumpleanos</span>
+      <span class="ev"><span class="rate-badge pessimist">15%</span> <span class="rate-badge standard">35%</span> <span class="rate-badge optimist">50%</span></span>
+    </div>
+
+    <div class="explain-note">
+      Pesimista: stand mal ubicado, poco incentivo, equipo no empuja. Estandar: stand visible, buen gancho (2x1, postre gratis), equipo colabora. Optimista: stand en punto de pago, gancho irresistible, equipo entrenado, marca fuerte en la zona.
+    </div>
+  </div>
+
+  <div class="explain-card">
+    <div class="explain-title">Sobre el costo de WhatsApp</div>
+    <div class="explain-note" style="color: var(--steel); margin-top: 0;">
+      Meta cobra $0.0858 por conversacion de marketing (tarifa "Rest of Latin America", vigente 2026). Cada conversacion es una ventana de 24 horas. Dentro de esa ventana puedes enviar multiples mensajes (texto, imagen, video, botones) sin costo adicional. Esto significa que un envio de promo con imagen + texto + boton de CTA = 1 sola conversacion = $0.0858. El costo no se multiplica por cantidad de mensajes dentro de la misma ventana.
+    </div>
   </div>
 
   <div class="disclaimer">
-    Captacion: 30% de nuevos. ~40% de visitas son repetidas (no se cuentan doble).
-    Retorno: promos 20%, reactivacion 10%, cumpleanos 35%. WhatsApp API: $0.085/msg (LATAM).
-    Resultados reales pueden variar.
+    Todos los numeros son estimaciones basadas en tasas de mercado para WhatsApp marketing en LATAM y negocios de hospitality/servicios. Resultados reales dependen de la calidad del incentivo, ubicacion del stand, y ejecucion del equipo.
   </div>
 
   <div class="powered"><span>Powered by Grip</span></div>
@@ -612,114 +878,230 @@
 </div>
 
 <script>
+  // --- CONSTANTS ---
   const GRIP_MONTHLY = 50;
-  const WA_COST_PER_MSG = 0.085; // Rest of Latin America
-  const CAPTURE_RATE = 0.30; // 30% de clientes dejan datos
-  const REPEAT_RATE = 0.40; // 40% de visitas son clientes que repiten (no nuevos)
-  const RETURN_RATE_PROMO = 0.20; // 20% vuelven por promos
-  const RETURN_RATE_REACT = 0.10; // 10% vuelven por reactivacion
-  const BDAY_RETURN_RATE = 0.35; // 35% vuelven por cumpleanos
+  const WA_CONV_COST = 0.0858; // per marketing conversation, Rest of Latin America
   const MONTHS = 3;
 
-  let bdayManual = false; // si el usuario toco el slider de cumpleanos
+  // --- SCENARIO RATES ---
+  const SCENARIOS = {
+    pessimist: {
+      repeat: 0.50,    // 50% de visitas son repetidas
+      capture: 0.15,   // 15% de nuevos se registran
+      retPromo: 0.08,  // 8% vuelven por promo
+      retReact: 0.05,  // 5% vuelven por reactivacion
+      retBday: 0.15,   // 15% vuelven por cumpleanos
+      label: 'Pesimista',
+      class: 'pessimist',
+      color: 'amber',
+      desc: 'Stand mal ubicado, poco incentivo, equipo no empuja.'
+    },
+    standard: {
+      repeat: 0.40,
+      capture: 0.30,
+      retPromo: 0.20,
+      retReact: 0.10,
+      retBday: 0.35,
+      label: 'Estandar',
+      class: 'standard',
+      color: 'blue',
+      desc: 'Stand visible, buen gancho, equipo colabora.'
+    },
+    optimist: {
+      repeat: 0.30,
+      capture: 0.45,
+      retPromo: 0.35,
+      retReact: 0.18,
+      retBday: 0.50,
+      label: 'Optimista',
+      class: 'optimist',
+      color: 'green',
+      desc: 'Stand en punto de pago, gancho irresistible, equipo entrenado.'
+    }
+  };
 
-  document.getElementById('bdays').addEventListener('input', function() {
+  let currentScenario = 'standard';
+  let bdayManual = false;
+
+  function onBdayInput() {
     bdayManual = true;
     calc();
-  });
+  }
 
-  function calcSuggestedBdays(totalContacts) {
-    // ~8.3% de la base tiene cumple cada mes
-    return Math.round(totalContacts / 12);
+  function setScenario(s) {
+    currentScenario = s;
+
+    // Update tabs
+    document.querySelectorAll('.scenario-tab').forEach(t => {
+      t.className = 'scenario-tab';
+    });
+    const tab = document.getElementById('tab-' + s);
+    tab.classList.add('active-' + s);
+
+    // Reset bday manual so it recalculates with new rates
+    bdayManual = false;
+    calc();
+  }
+
+  function pct(n) { return Math.round(n * 100) + '%'; }
+  function fmt(n) { return Math.round(n).toLocaleString(); }
+
+  function updateBadge(id, scenarioKey) {
+    const el = document.getElementById(id);
+    const sc = SCENARIOS[currentScenario];
+    el.className = 'rate-badge ' + currentScenario;
   }
 
   function calc() {
+    const S = SCENARIOS[currentScenario];
+
     const ticket = parseInt(document.getElementById('ticket').value);
     const clientsDay = parseInt(document.getElementById('clients').value);
     const daysWeek = parseInt(document.getElementById('days').value);
     const promos = parseInt(document.getElementById('promos').value);
     const reacts = parseInt(document.getElementById('reacts').value);
+    const giftCost = parseFloat(document.getElementById('gift').value);
 
-    // Update displays
+    // Update slider displays
     document.getElementById('ticket-val').textContent = ticket;
     document.getElementById('clients-val').textContent = clientsDay;
     document.getElementById('days-val').textContent = daysWeek;
     document.getElementById('promos-val').textContent = promos;
     document.getElementById('reacts-val').textContent = reacts;
+    document.getElementById('gift-val').textContent = giftCost % 1 === 0 ? giftCost : giftCost.toFixed(1);
 
-    // Unique new clients per month (not all visitors are new)
-    const clientsMonth = clientsDay * daysWeek * 4.3;
-    const newClientsMonth = Math.round(clientsMonth * (1 - REPEAT_RATE));
-    const newContactsMonth = Math.round(newClientsMonth * CAPTURE_RATE);
-    const totalContacts = newContactsMonth * MONTHS;
+    // === FUNNEL ===
+    const visitsMonth = Math.round(clientsDay * daysWeek * 4.3);
+    const repeats = Math.round(visitsMonth * S.repeat);
+    const newVisitors = visitsMonth - repeats;
+    const registered = Math.round(newVisitors * S.capture);
+    const totalContacts = registered * MONTHS;
 
-    // Suggested birthdays — auto-update slider if user hasn't touched it
-    const suggestedBdays = calcSuggestedBdays(totalContacts);
+    document.getElementById('f-visits').textContent = fmt(visitsMonth);
+    document.getElementById('f-repeats').textContent = '-' + fmt(repeats);
+    document.getElementById('f-new').textContent = fmt(newVisitors);
+    document.getElementById('f-registered').textContent = fmt(registered);
+    document.getElementById('f-total').textContent = fmt(totalContacts);
+
+    // Update badges
+    document.getElementById('badge-repeat').textContent = pct(S.repeat);
+    document.getElementById('badge-repeat').className = 'rate-badge ' + currentScenario;
+    document.getElementById('badge-capture').textContent = pct(S.capture);
+    document.getElementById('badge-capture').className = 'rate-badge ' + currentScenario;
+
+    // Funnel note
+    const newPerDay = Math.round(clientsDay * (1 - S.repeat));
+    const regPerDay = Math.round(newPerDay * S.capture);
+    document.getElementById('f-note').textContent =
+      'De ' + clientsDay + ' clientes/dia, ~' + pct(S.repeat) + ' ya vinieron antes. De los ' +
+      newPerDay + ' nuevos, ~' + pct(S.capture) + ' dejan sus datos via NFC/QR. En 3 meses acumulas ' +
+      fmt(totalContacts) + ' contactos unicos.';
+
+    // Suggested birthdays
+    const suggestedBdays = Math.round(totalContacts / 12);
     document.getElementById('bday-hint').textContent = 'Sugerido: ~' + suggestedBdays + ' cumpleanos/mes';
     if (!bdayManual) {
       const bdaySlider = document.getElementById('bdays');
       bdaySlider.value = Math.min(suggestedBdays, parseInt(bdaySlider.max));
-      document.getElementById('bdays-val').textContent = bdaySlider.value;
     }
+    const bdays = parseInt(document.getElementById('bdays').value);
+    document.getElementById('bdays-val').textContent = bdays;
 
-    const bdayMsgs = parseInt(document.getElementById('bdays').value);
-    document.getElementById('bdays-val').textContent = bdayMsgs;
+    // === RETURNS ===
+    const promoSent = totalContacts * promos;
+    const reactSent = totalContacts * reacts;
+    const bdaySent = bdays;
 
-    // Messages month 3
-    const promoMsgs = totalContacts * promos;
-    const reactMsgs = totalContacts * reacts;
+    const promoBack = Math.round(promoSent * S.retPromo);
+    const reactBack = Math.round(reactSent * S.retReact);
+    const bdayBack = Math.round(bdaySent * S.retBday);
+    const totalReturn = promoBack + reactBack + bdayBack;
+    const revenueGross = totalReturn * ticket;
+    const totalGiftCost = totalReturn * giftCost;
+    const revenue = revenueGross - totalGiftCost;
 
-    // WhatsApp costs split
-    const waCostPromoReact = (promoMsgs + reactMsgs) * WA_COST_PER_MSG;
-    const waCostBday = bdayMsgs * WA_COST_PER_MSG;
-    const waCostTotal = waCostPromoReact + waCostBday;
+    document.getElementById('ret-promo-sent').textContent = fmt(promoSent);
+    document.getElementById('ret-promo-back').textContent = fmt(promoBack);
+    document.getElementById('ret-react-sent').textContent = fmt(reactSent);
+    document.getElementById('ret-react-back').textContent = fmt(reactBack);
+    document.getElementById('ret-bday-sent').textContent = fmt(bdaySent);
+    document.getElementById('ret-bday-back').textContent = fmt(bdayBack);
+    document.getElementById('ret-total').textContent = fmt(totalReturn);
+    document.getElementById('ret-revenue-gross').textContent = '$' + fmt(revenueGross);
+    document.getElementById('ret-gift-cost').textContent = '-$' + fmt(totalGiftCost);
+    document.getElementById('ret-revenue').textContent = '$' + fmt(revenue);
 
-    // Returns
-    const returnsPromo = Math.round(totalContacts * promos * RETURN_RATE_PROMO);
-    const returnsReact = Math.round(totalContacts * reacts * RETURN_RATE_REACT);
-    const returnsBday = Math.round(bdayMsgs * BDAY_RETURN_RATE);
-    const clientsReturn = returnsPromo + returnsReact + returnsBday;
-    const revenue = clientsReturn * ticket;
+    // Return badges
+    document.getElementById('badge-ret-promo').textContent = pct(S.retPromo);
+    document.getElementById('badge-ret-promo').className = 'rate-badge ' + currentScenario;
+    document.getElementById('badge-ret-react').textContent = pct(S.retReact);
+    document.getElementById('badge-ret-react').className = 'rate-badge ' + currentScenario;
+    document.getElementById('badge-ret-bday').textContent = pct(S.retBday);
+    document.getElementById('badge-ret-bday').className = 'rate-badge ' + currentScenario;
 
-    // Totals
-    const totalInvestment = GRIP_MONTHLY + waCostTotal;
-    const profit = revenue - totalInvestment;
+    // Return note
+    document.getElementById('ret-note').textContent =
+      'No todos los que reciben tu mensaje vuelven. En escenario ' + S.label.toLowerCase() + ': ' +
+      pct(S.retPromo) + ' vuelven por promos, ' + pct(S.retReact) + ' por reactivacion, ' +
+      pct(S.retBday) + ' por cumpleanos. ' + S.desc;
+
+    // === WHATSAPP COSTS ===
+    const waPromoConv = promoSent;
+    const waReactConv = reactSent;
+    const waBdayConv = bdaySent;
+    const waTotalConv = waPromoConv + waReactConv + waBdayConv;
+
+    const waPromoCost = waPromoConv * WA_CONV_COST;
+    const waReactCost = waReactConv * WA_CONV_COST;
+    const waBdayCost = waBdayConv * WA_CONV_COST;
+    const waTotalCost = waPromoCost + waReactCost + waBdayCost;
+
+    document.getElementById('wa-promo-conv').textContent = fmt(waPromoConv);
+    document.getElementById('wa-promo-cost').textContent = '$' + fmt(waPromoCost);
+    document.getElementById('wa-react-conv').textContent = fmt(waReactConv);
+    document.getElementById('wa-react-cost').textContent = '$' + fmt(waReactCost);
+    document.getElementById('wa-bday-conv').textContent = fmt(waBdayConv);
+    document.getElementById('wa-bday-cost').textContent = '$' + fmt(waBdayCost);
+    document.getElementById('wa-total-conv').textContent = fmt(waTotalConv);
+    document.getElementById('wa-total-cost').textContent = '$' + fmt(waTotalCost);
+
+    // === TOTALS ===
+    const totalInvestment = GRIP_MONTHLY + waTotalCost + totalGiftCost;
+    const profit = revenueGross - totalInvestment;
     const roi = totalInvestment > 0 ? revenue / totalInvestment : 0;
 
-    // Update results
-    document.getElementById('r-contacts').textContent = totalContacts.toLocaleString();
-    document.getElementById('r-return').textContent = clientsReturn.toLocaleString();
-    document.getElementById('r-revenue').textContent = '$' + revenue.toLocaleString();
-    document.getElementById('r-wacost').textContent = '$' + Math.round(waCostTotal).toLocaleString();
+    // Results grid
+    document.getElementById('r-contacts').textContent = fmt(totalContacts);
+    document.getElementById('r-return').textContent = fmt(totalReturn);
+    document.getElementById('r-revenue').textContent = '$' + fmt(revenueGross);
+    document.getElementById('r-wacost').textContent = '$' + fmt(waTotalCost);
 
     // ROI
     document.getElementById('r-roi').textContent = roi.toFixed(1) + 'x';
     document.getElementById('r-roi-dollar').textContent = roi.toFixed(2);
 
     // Bars
-    const maxVal = Math.max(revenue, totalInvestment);
+    const maxVal = Math.max(revenueGross, totalInvestment);
     const investPct = Math.max(5, (totalInvestment / maxVal) * 100);
     const revenuePct = Math.max(5, (revenue / maxVal) * 100);
     document.getElementById('bar-invest').style.width = investPct + '%';
     document.getElementById('bar-revenue').style.width = revenuePct + '%';
-    document.getElementById('comp-invest-label').textContent = '$' + Math.round(totalInvestment).toLocaleString();
-    document.getElementById('comp-revenue-label').textContent = '$' + revenue.toLocaleString();
+    document.getElementById('comp-invest-label').textContent = '$' + fmt(totalInvestment);
+    document.getElementById('comp-revenue-label').textContent = '$' + fmt(revenueGross);
 
-    // Breakdown
+    // Final breakdown
     document.getElementById('b-grip').textContent = '$' + GRIP_MONTHLY;
-    document.getElementById('b-wa').textContent = '$' + Math.round(waCostPromoReact).toLocaleString();
-    document.getElementById('b-wa-bday').textContent = '$' + Math.round(waCostBday).toLocaleString();
-    document.getElementById('b-total-inv').textContent = '$' + Math.round(totalInvestment).toLocaleString();
-    document.getElementById('b-profit').textContent = (profit >= 0 ? '+' : '') + '$' + Math.round(profit).toLocaleString();
+    document.getElementById('b-wa').textContent = '$' + fmt(waTotalCost);
+    document.getElementById('b-gifts').textContent = '$' + fmt(totalGiftCost);
+    document.getElementById('b-total-inv').textContent = '$' + fmt(totalInvestment);
+    document.getElementById('b-revenue').textContent = '$' + fmt(revenueGross);
+    document.getElementById('b-profit').textContent = (profit >= 0 ? '+' : '') + '$' + fmt(profit);
+    document.getElementById('b-profit').style.color = profit >= 0 ? 'var(--circuit-green)' : 'var(--danger)';
 
     // Pitch
-    document.getElementById('pitch-invest').textContent = '$' + Math.round(totalInvestment).toLocaleString();
-    document.getElementById('pitch-revenue').textContent = '$' + revenue.toLocaleString();
+    document.getElementById('pitch-invest').textContent = '$' + fmt(totalInvestment);
+    document.getElementById('pitch-revenue').textContent = '$' + fmt(revenueGross);
     document.getElementById('pitch-roi').textContent = roi.toFixed(1) + 'x';
-
-    // Color profit
-    const profitEl = document.getElementById('b-profit');
-    profitEl.style.color = profit >= 0 ? 'var(--circuit-green)' : 'var(--danger)';
   }
 
   // Init
