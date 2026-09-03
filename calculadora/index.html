@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grip — Calculadora ROI</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --void: #0A0A0F;
+    --onyx: #14141F;
+    --electric: #2D7AF6;
+    --cyan-pulse: #5BA8FF;
+    --white: #F0F0F5;
+    --steel: #8A8FA3;
+    --circuit-green: #34D399;
+    --grid: #1E1E2E;
+    --danger: #EF4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--void);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(45,122,246,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 100%, rgba(45,122,246,0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── HEADER ─── */
+  .logo-wrap {
+    text-align: center;
+    padding: 16px 0 8px;
+  }
+  .logo-wrap img {
+    width: 120px;
+    filter: drop-shadow(0 0 20px rgba(45,122,246,0.15));
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .page-header .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--electric);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(45,122,246,0.3);
+  }
+  .page-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .page-header h1 span { color: var(--electric); }
+  .page-header p {
+    font-size: 14px;
+    color: var(--steel);
+    line-height: 1.6;
+  }
+
+  /* ─── SECTION ─── */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--electric);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    text-shadow: 0 0 8px rgba(45,122,246,0.2);
+  }
+
+  /* ─── INPUT CARD ─── */
+  .input-card {
+    background: linear-gradient(135deg, rgba(20,20,31,0.8), rgba(14,14,22,0.9));
+    border: 1px solid rgba(45,122,246,0.1);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+  .input-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(45,122,246,0.15), transparent);
+  }
+  .input-card:hover { border-color: rgba(45,122,246,0.2); }
+
+  .input-card .input-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .input-card .input-desc {
+    font-size: 11px;
+    color: var(--steel);
+    margin-bottom: 12px;
+  }
+
+  .input-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .slider-wrap { flex: 1; }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--grid);
+    outline: none;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--electric), #4A90FF);
+    border: 2px solid var(--void);
+    box-shadow: 0 0 12px rgba(45,122,246,0.3);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 20px rgba(45,122,246,0.5);
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--electric), #4A90FF);
+    border: 2px solid var(--void);
+    box-shadow: 0 0 12px rgba(45,122,246,0.3);
+    cursor: pointer;
+  }
+
+  .slider-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    min-width: 70px;
+    text-align: right;
+    text-shadow: 0 0 10px rgba(255,255,255,0.05);
+  }
+  .slider-value .unit {
+    font-size: 12px;
+    color: var(--steel);
+    font-weight: 500;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--grid), transparent);
+    margin: 24px 0;
+  }
+
+  /* ─── RESULTS ─── */
+  .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .result-card {
+    background: linear-gradient(135deg, rgba(20,20,31,0.85), rgba(14,14,22,0.95));
+    border: 1px solid rgba(45,122,246,0.08);
+    border-radius: 14px;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+  }
+  .result-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(45,122,246,0.12), transparent);
+  }
+  .result-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(45,122,246,0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+
+  .result-card .result-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--electric);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    text-shadow: 0 0 6px rgba(45,122,246,0.2);
+  }
+  .result-card .result-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--white);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .result-card .result-sub {
+    font-size: 11px;
+    color: var(--steel);
+    margin-top: 4px;
+  }
+
+  .result-card.green .result-value { color: var(--circuit-green); text-shadow: 0 0 15px rgba(52,211,153,0.2); }
+  .result-card.green { border-color: rgba(52,211,153,0.15); }
+  .result-card.green::before { background: linear-gradient(90deg, transparent, rgba(52,211,153,0.2), transparent); }
+
+  .result-card.blue .result-value { color: var(--electric); text-shadow: 0 0 15px rgba(45,122,246,0.3); }
+
+  .result-card.danger .result-value { color: var(--steel); }
+
+  /* ─── ROI HERO ─── */
+  .roi-hero {
+    background: linear-gradient(135deg, rgba(20,20,31,0.9), rgba(10,10,15,0.95));
+    border: 1px solid rgba(52,211,153,0.15);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(52,211,153,0.03);
+  }
+  .roi-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(52,211,153,0.3), transparent);
+  }
+  .roi-hero::after {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 200px; height: 120px;
+    background: radial-gradient(ellipse, rgba(52,211,153,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .roi-hero .roi-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--circuit-green);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-shadow: 0 0 10px rgba(52,211,153,0.3);
+  }
+  .roi-hero .roi-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--circuit-green);
+    text-shadow: 0 0 30px rgba(52,211,153,0.2);
+    line-height: 1;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+  .roi-hero .roi-sub {
+    font-size: 14px;
+    color: var(--steel);
+    position: relative;
+    z-index: 1;
+  }
+  .roi-hero .roi-sub strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  /* ─── COMPARISON BAR ─── */
+  .comparison {
+    margin: 20px 0;
+  }
+  .comparison .comp-label {
+    font-size: 12px;
+    color: var(--steel);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .comp-bar-wrap {
+    background: var(--onyx);
+    border-radius: 8px;
+    height: 36px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--grid);
+    margin-bottom: 6px;
+  }
+  .comp-bar {
+    height: 100%;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: #FFF;
+    transition: width 0.6s cubic-bezier(0.23,1,0.32,1);
+    position: relative;
+  }
+  .comp-bar.invest {
+    background: linear-gradient(90deg, rgba(138,143,163,0.3), rgba(138,143,163,0.15));
+    border: 1px solid rgba(138,143,163,0.2);
+  }
+  .comp-bar.revenue {
+    background: linear-gradient(90deg, rgba(52,211,153,0.3), rgba(52,211,153,0.15));
+    border: 1px solid rgba(52,211,153,0.3);
+    box-shadow: 0 0 20px rgba(52,211,153,0.08);
+  }
+
+  /* ─── BREAKDOWN ─── */
+  .breakdown {
+    background: linear-gradient(135deg, rgba(20,20,31,0.7), rgba(14,14,22,0.85));
+    border: 1px solid rgba(45,122,246,0.08);
+    border-radius: 14px;
+    padding: 18px;
+    margin: 14px 0;
+  }
+  .breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(30,30,46,0.5);
+    font-size: 13px;
+  }
+  .breakdown-row:last-child { border-bottom: none; }
+  .breakdown-row .bl { color: var(--steel); }
+  .breakdown-row .bv {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--white);
+    font-size: 13px;
+  }
+  .breakdown-row.total { padding-top: 12px; margin-top: 4px; border-top: 1px solid var(--grid); }
+  .breakdown-row.total .bl { color: var(--white); font-weight: 600; }
+  .breakdown-row.total .bv { color: var(--circuit-green); font-size: 15px; text-shadow: 0 0 8px rgba(52,211,153,0.2); }
+
+  /* ─── PITCH LINE ─── */
+  .pitch {
+    background: linear-gradient(135deg, rgba(20,20,31,0.9), rgba(10,10,15,0.95));
+    border: 1px solid rgba(45,122,246,0.12);
+    border-left: 3px solid var(--electric);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: -4px 0 20px rgba(45,122,246,0.05);
+  }
+  .pitch p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .pitch p span { color: var(--electric); }
+  .pitch p .green { color: var(--circuit-green); }
+
+  /* ─── FOOTER ─── */
+  .powered {
+    text-align: center;
+    padding: 30px 0 10px;
+  }
+  .powered span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #333;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ─── DISCLAIMER ─── */
+  .disclaimer {
+    font-size: 10px;
+    color: #444;
+    text-align: center;
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="logo-wrap">
+    <img src="logo_clean.png" alt="Grip">
+  </div>
+
+  <div class="page-header">
+    <div class="tag">[calculadora roi]</div>
+    <h1>Cuanto <span>ganas</span> con Grip?</h1>
+    <p>Ajusta los datos de tu negocio y mira el retorno real.</p>
+  </div>
+
+  <!-- ─── INPUTS ─── -->
+  <div class="section-label">[tu negocio]</div>
+
+  <div class="input-card">
+    <div class="input-label">Ticket promedio por visita</div>
+    <div class="input-desc">Lo que gasta un cliente en promedio</div>
+    <div class="input-row">
+      <div class="slider-wrap">
+        <input type="range" id="ticket" min="3" max="100" value="15" oninput="calc()">
+      </div>
+      <div class="slider-value">$<span id="ticket-val">15</span></div>
+    </div>
+  </div>
+
+  <div class="input-card">
+    <div class="input-label">Clientes por dia</div>
+    <div class="input-desc">Promedio de personas que entran al local</div>
+    <div class="input-row">
+      <div class="slider-wrap">
+        <input type="range" id="clients" min="5" max="200" value="40" oninput="calc()">
+      </div>
+      <div class="slider-value"><span id="clients-val">40</span></div>
+    </div>
+  </div>
+
+  <div class="input-card">
+    <div class="input-label">Dias abierto por semana</div>
+    <div class="input-row">
+      <div class="slider-wrap">
+        <input type="range" id="days" min="3" max="7" value="6" oninput="calc()">
+      </div>
+      <div class="slider-value"><span id="days-val">6</span> <span class="unit">dias</span></div>
+    </div>
+  </div>
+
+  <div class="input-card">
+    <div class="input-label">Mensajes por mes</div>
+    <div class="input-desc">Promos, cumpleanos, reactivacion</div>
+    <div class="input-row">
+      <div class="slider-wrap">
+        <input type="range" id="msgs" min="1" max="12" value="4" oninput="calc()">
+      </div>
+      <div class="slider-value"><span id="msgs-val">4</span> <span class="unit">envios</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ─── RESULTS ─── -->
+  <div class="section-label">[proyeccion mes 3]</div>
+
+  <div class="results-grid">
+    <div class="result-card blue">
+      <div class="result-label">Contactos</div>
+      <div class="result-value" id="r-contacts">216</div>
+      <div class="result-sub">en tu base de datos</div>
+    </div>
+    <div class="result-card">
+      <div class="result-label">Clientes que vuelven</div>
+      <div class="result-value" id="r-return">43</div>
+      <div class="result-sub">por tus mensajes</div>
+    </div>
+    <div class="result-card green">
+      <div class="result-label">Ingreso extra</div>
+      <div class="result-value" id="r-revenue">$648</div>
+      <div class="result-sub">ventas adicionales</div>
+    </div>
+    <div class="result-card danger">
+      <div class="result-label">Costo WhatsApp</div>
+      <div class="result-value" id="r-wacost">$73</div>
+      <div class="result-sub">lo pagas directo a Meta</div>
+    </div>
+  </div>
+
+  <!-- ─── ROI HERO ─── -->
+  <div class="roi-hero">
+    <div class="roi-label">Retorno de inversion</div>
+    <div class="roi-value" id="r-roi">5.3x</div>
+    <div class="roi-sub">Por cada <strong>$1</strong> que inviertes, recuperas <strong>$<span id="r-roi-dollar">5.30</span></strong></div>
+  </div>
+
+  <!-- ─── COMPARISON BARS ─── -->
+  <div class="comparison">
+    <div class="comp-label">
+      <span>Inversion total</span>
+      <span id="comp-invest-label">$122</span>
+    </div>
+    <div class="comp-bar-wrap">
+      <div class="comp-bar invest" id="bar-invest" style="width: 15%;">
+      </div>
+    </div>
+
+    <div class="comp-label" style="margin-top: 10px;">
+      <span>Ingreso extra generado</span>
+      <span id="comp-revenue-label" style="color: var(--circuit-green);">$648</span>
+    </div>
+    <div class="comp-bar-wrap">
+      <div class="comp-bar revenue" id="bar-revenue" style="width: 80%;">
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── BREAKDOWN ─── -->
+  <div class="section-label">[desglose mensual]</div>
+
+  <div class="breakdown">
+    <div class="breakdown-row">
+      <span class="bl">Grip (plataforma + soporte)</span>
+      <span class="bv" id="b-grip">$50</span>
+    </div>
+    <div class="breakdown-row">
+      <span class="bl">WhatsApp API (lo pagas tu)</span>
+      <span class="bv" id="b-wa">$73</span>
+    </div>
+    <div class="breakdown-row">
+      <span class="bl">Total inversion</span>
+      <span class="bv" id="b-total-inv">$123</span>
+    </div>
+    <div class="breakdown-row total">
+      <span class="bl">Ganancia neta</span>
+      <span class="bv" id="b-profit">+$525</span>
+    </div>
+  </div>
+
+  <!-- ─── PITCH ─── -->
+  <div class="pitch">
+    <p>"Inviertes <span id="pitch-invest">$123</span>, recuperas <span class="green" id="pitch-revenue">$648</span>. Eso es <span id="pitch-roi">5.3x</span> tu inversion."</p>
+  </div>
+
+  <div class="disclaimer">
+    Estimacion basada en una tasa de retorno del 20% sobre contactos alcanzados.
+    Tasa de captacion estimada: 30% de clientes diarios.
+    Costo WhatsApp API: $0.085/msg (tarifa Rest of Latin America, Oct 2026).
+    Resultados reales pueden variar.
+  </div>
+
+  <div class="powered"><span>Powered by Grip</span></div>
+
+</div>
+
+<script>
+  const GRIP_MONTHLY = 50;
+  const WA_COST_PER_MSG = 0.085; // Rest of Latin America
+  const CAPTURE_RATE = 0.30; // 30% de clientes dejan datos
+  const RETURN_RATE = 0.20; // 20% vuelven por los mensajes
+  const MONTHS = 3; // Proyeccion a 3 meses
+
+  function calc() {
+    const ticket = parseInt(document.getElementById('ticket').value);
+    const clientsDay = parseInt(document.getElementById('clients').value);
+    const daysWeek = parseInt(document.getElementById('days').value);
+    const msgsMonth = parseInt(document.getElementById('msgs').value);
+
+    // Update displays
+    document.getElementById('ticket-val').textContent = ticket;
+    document.getElementById('clients-val').textContent = clientsDay;
+    document.getElementById('days-val').textContent = daysWeek;
+    document.getElementById('msgs-val').textContent = msgsMonth;
+
+    // Calc contacts (accumulated over 3 months)
+    const clientsMonth = clientsDay * daysWeek * 4.3; // clients per month
+    const newContactsMonth = Math.round(clientsMonth * CAPTURE_RATE);
+    const totalContacts = newContactsMonth * MONTHS; // accumulated
+
+    // WhatsApp cost (month 3 — sending to full base)
+    const totalMessages = totalContacts * msgsMonth;
+    const waCost = totalMessages * WA_COST_PER_MSG;
+
+    // Returns
+    const contactsReached = totalContacts; // sending to all
+    const clientsReturn = Math.round(contactsReached * RETURN_RATE);
+    const revenue = clientsReturn * ticket;
+
+    // Totals
+    const totalInvestment = GRIP_MONTHLY + waCost;
+    const profit = revenue - totalInvestment;
+    const roi = totalInvestment > 0 ? revenue / totalInvestment : 0;
+
+    // Update results
+    document.getElementById('r-contacts').textContent = totalContacts.toLocaleString();
+    document.getElementById('r-return').textContent = clientsReturn.toLocaleString();
+    document.getElementById('r-revenue').textContent = '$' + revenue.toLocaleString();
+    document.getElementById('r-wacost').textContent = '$' + Math.round(waCost).toLocaleString();
+
+    // ROI
+    document.getElementById('r-roi').textContent = roi.toFixed(1) + 'x';
+    document.getElementById('r-roi-dollar').textContent = roi.toFixed(2);
+
+    // Bars
+    const maxVal = Math.max(revenue, totalInvestment);
+    const investPct = Math.max(5, (totalInvestment / maxVal) * 100);
+    const revenuePct = Math.max(5, (revenue / maxVal) * 100);
+    document.getElementById('bar-invest').style.width = investPct + '%';
+    document.getElementById('bar-revenue').style.width = revenuePct + '%';
+    document.getElementById('comp-invest-label').textContent = '$' + Math.round(totalInvestment).toLocaleString();
+    document.getElementById('comp-revenue-label').textContent = '$' + revenue.toLocaleString();
+
+    // Breakdown
+    document.getElementById('b-grip').textContent = '$' + GRIP_MONTHLY;
+    document.getElementById('b-wa').textContent = '$' + Math.round(waCost).toLocaleString();
+    document.getElementById('b-total-inv').textContent = '$' + Math.round(totalInvestment).toLocaleString();
+    document.getElementById('b-profit').textContent = (profit >= 0 ? '+' : '') + '$' + Math.round(profit).toLocaleString();
+
+    // Pitch
+    document.getElementById('pitch-invest').textContent = '$' + Math.round(totalInvestment).toLocaleString();
+    document.getElementById('pitch-revenue').textContent = '$' + revenue.toLocaleString();
+    document.getElementById('pitch-roi').textContent = roi.toFixed(1) + 'x';
+
+    // Color profit
+    const profitEl = document.getElementById('b-profit');
+    profitEl.style.color = profit >= 0 ? 'var(--circuit-green)' : 'var(--danger)';
+  }
+
+  // Init
+  calc();
+</script>
+
+</body>
+</html>
