@@ -462,25 +462,29 @@
   <div class="section-label">[resumen — <span id="results-month-label">mes 3</span>]</div>
 
   <div class="results-grid">
-    <div class="result-card blue">
+    <div class="result-card blue has-tip" tabindex="0">
       <div class="result-label">Contactos</div>
       <div class="result-value" id="r-contacts">557</div>
       <div class="result-sub">en tu base de datos</div>
+      <span class="tip-box" id="tip-card-contacts" style="bottom:auto;top:calc(100% + 8px);"><strong>Contactos acumulados</strong><br>Personas que dejaron sus datos vía NFC/QR desde que activaste Grip.<div class="tip-formula" id="tip-card-contacts-f">186 registros/mes × 3 meses = 557</div></span>
     </div>
-    <div class="result-card">
+    <div class="result-card has-tip" tabindex="0">
       <div class="result-label">Clientes que vuelven</div>
       <div class="result-value" id="r-return">343</div>
       <div class="result-sub">por tus mensajes</div>
+      <span class="tip-box" id="tip-card-return" style="bottom:auto;top:calc(100% + 8px);"><strong>Clientes que vuelven</strong><br>Suma de los que regresan por promos, reactivación y cumpleaños.<div class="tip-formula" id="tip-card-return-f">334 promos + 31 react. + 2 cumple. = 367</div></span>
     </div>
-    <div class="result-card green">
-      <div class="result-label">Ingreso extra</div>
-      <div class="result-value" id="r-revenue">$5,145</div>
-      <div class="result-sub">ventas adicionales</div>
+    <div class="result-card green has-tip" tabindex="0">
+      <div class="result-label">Ingreso neto</div>
+      <div class="result-value" id="r-revenue">$4,404</div>
+      <div class="result-sub">después de incentivos</div>
+      <span class="tip-box" id="tip-card-revenue" style="bottom:auto;top:calc(100% + 8px);"><strong>Ingreso neto</strong><br>Lo que facturan los clientes que vuelven, menos el costo de lo que regalas (postre, bebida, descuento).<div class="tip-formula" id="tip-card-revenue-f">367 × $15 ticket = $5,505 bruto − $1,101 incentivos = $4,404</div></span>
     </div>
-    <div class="result-card danger">
+    <div class="result-card danger has-tip" tabindex="0">
       <div class="result-label">Costo WhatsApp</div>
       <div class="result-value" id="r-wacost">$161</div>
       <div class="result-sub">conversaciones API</div>
+      <span class="tip-box" id="tip-card-wa" style="bottom:auto;top:calc(100% + 8px);"><strong>Costo WhatsApp API</strong><br>Cada envío (promo, reactivación, cumpleaños) abre 1 conversación de 24h. Dentro envías texto + imagen sin costo extra.<div class="tip-formula" id="tip-card-wa-f">1,671 promos + 306 react. + 5 cumple. = 1,982 conv. × $0.0858 = $170</div></span>
     </div>
   </div>
 
@@ -859,10 +863,17 @@
       currentMonth + (currentMonth === 1 ? ' mes' : ' meses') + ' acumulas ' + fmt(D.totalContacts) + ' contactos únicos.';
 
     // === RESULTS GRID ===
+    const netRevenue = D.revenueGross - D.totalGiftCost;
     document.getElementById('r-contacts').textContent = fmt(D.totalContacts);
     document.getElementById('r-return').textContent = fmt(D.totalReturn);
-    document.getElementById('r-revenue').textContent = '$' + fmt(D.revenueGross);
+    document.getElementById('r-revenue').textContent = '$' + fmt(netRevenue);
     document.getElementById('r-wacost').textContent = '$' + fmt(D.waTotalCost);
+
+    // Result card tooltips
+    document.getElementById('tip-card-contacts-f').textContent = fmt(D.registered) + ' registros/mes × ' + currentMonth + ' meses = ' + fmt(D.totalContacts);
+    document.getElementById('tip-card-return-f').textContent = fmt(D.promoBack) + ' promos + ' + fmt(D.reactBack) + ' react. + ' + fmt(D.bdayBack) + ' cumple. = ' + fmt(D.totalReturn);
+    document.getElementById('tip-card-revenue-f').textContent = fmt(D.totalReturn) + ' × $' + ticket + ' ticket = $' + fmt(D.revenueGross) + ' bruto − $' + fmt(D.totalGiftCost) + ' incentivos = $' + fmt(netRevenue);
+    document.getElementById('tip-card-wa-f').textContent = fmt(D.waPromoConv) + ' promos + ' + fmt(D.waReactConv) + ' react. + ' + fmt(D.waBdayConv) + ' cumple. = ' + fmt(D.waTotalConv) + ' conv. × $0.0858 = $' + fmt(D.waTotalCost);
 
     // === RETURNS ===
     document.getElementById('ret-promo-sent').textContent = fmt(D.promoSent);
@@ -938,7 +949,6 @@
 
     // === TIMELINE TABLE ===
     const months = [1, 2, 3, 6, 12];
-    const rows = [];
     const data = {};
     months.forEach(m => {
       const bdayAuto = null; // auto for timeline
@@ -961,9 +971,25 @@
     tbody += tRow('Contactos', 'totalContacts', 'highlight');
     tbody += tRow('Clientes que vuelven', 'totalReturn', '');
     tbody += tRow('Ingreso bruto', 'revenueGross', '', '$');
+
+    // Ingreso neto (bruto - incentivos)
+    tbody += '<tr><td>Ingreso neto</td>';
+    months.forEach(m => {
+      const net = data[m].revenueGross - data[m].totalGiftCost;
+      const isActive = m === currentMonth ? ' col-active' : '';
+      tbody += '<td class="green' + isActive + '">$' + fmt(net) + '</td>';
+    });
+    tbody += '</tr>';
     tbody += tRow('Costo WhatsApp', 'waTotalCost', '', '$');
     tbody += tRow('Costo incentivos', 'totalGiftCost', '', '$');
-    tbody += tRow('Grip', 'M', '', '$'); // placeholder
+
+    // Grip row (fixed $50/mes)
+    tbody += '<tr><td>Grip</td>';
+    months.forEach(m => {
+      const isActive = m === currentMonth ? ' col-active' : '';
+      tbody += '<td class="' + isActive + '">$50</td>';
+    });
+    tbody += '</tr>';
 
     // Total inv and profit as custom rows
     tbody += '<tr class="total-row"><td>Total inversión</td>';
@@ -989,13 +1015,6 @@
     tbody += '</tr>';
 
     document.getElementById('timeline-body').innerHTML = tbody;
-
-    // Fix Grip row (it shows month number, replace with $50)
-    const gripRow = document.getElementById('timeline-body').children[5];
-    if (gripRow) {
-      const cells = gripRow.querySelectorAll('td');
-      cells.forEach((td, i) => { if (i > 0) td.textContent = '$50'; });
-    }
   }
 
   calc();
