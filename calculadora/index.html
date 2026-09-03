@@ -502,6 +502,18 @@
     </div>
   </div>
 
+  <div class="input-card">
+    <div class="input-label">Cumpleanos por mes</div>
+    <div class="input-desc">Estimado segun tu base — ajustalo si quieres</div>
+    <div class="input-row">
+      <div class="slider-wrap">
+        <input type="range" id="bdays" min="0" max="80" value="5" oninput="calc()">
+      </div>
+      <div class="slider-value"><span id="bdays-val">5</span> <span class="unit">envios</span></div>
+    </div>
+    <div class="input-desc" style="margin-top:8px; margin-bottom:0; color: var(--electric); font-size:10px;" id="bday-hint">Sugerido: ~5 cumpleanos/mes</div>
+  </div>
+
   <div class="divider"></div>
 
   <!-- ─── RESULTS ─── -->
@@ -590,8 +602,8 @@
   </div>
 
   <div class="disclaimer">
-    Tasa de captacion: 30%. Retorno por promos: 20%, reactivacion: 10%, cumpleanos: 35%.
-    Cumpleanos auto-calculado (~8% de la base/mes). WhatsApp API: $0.085/msg (LATAM).
+    Captacion: 30% de nuevos. ~40% de visitas son repetidas (no se cuentan doble).
+    Retorno: promos 20%, reactivacion 10%, cumpleanos 35%. WhatsApp API: $0.085/msg (LATAM).
     Resultados reales pueden variar.
   </div>
 
@@ -603,11 +615,23 @@
   const GRIP_MONTHLY = 50;
   const WA_COST_PER_MSG = 0.085; // Rest of Latin America
   const CAPTURE_RATE = 0.30; // 30% de clientes dejan datos
+  const REPEAT_RATE = 0.40; // 40% de visitas son clientes que repiten (no nuevos)
   const RETURN_RATE_PROMO = 0.20; // 20% vuelven por promos
   const RETURN_RATE_REACT = 0.10; // 10% vuelven por reactivacion
-  const BDAY_RATE = 1 / 12; // ~8.3% de la base tiene cumple cada mes
-  const BDAY_RETURN_RATE = 0.35; // 35% vuelven por cumpleanos (mas personal)
+  const BDAY_RETURN_RATE = 0.35; // 35% vuelven por cumpleanos
   const MONTHS = 3;
+
+  let bdayManual = false; // si el usuario toco el slider de cumpleanos
+
+  document.getElementById('bdays').addEventListener('input', function() {
+    bdayManual = true;
+    calc();
+  });
+
+  function calcSuggestedBdays(totalContacts) {
+    // ~8.3% de la base tiene cumple cada mes
+    return Math.round(totalContacts / 12);
+  }
 
   function calc() {
     const ticket = parseInt(document.getElementById('ticket').value);
@@ -623,23 +647,34 @@
     document.getElementById('promos-val').textContent = promos;
     document.getElementById('reacts-val').textContent = reacts;
 
-    // Contacts accumulated over 3 months
+    // Unique new clients per month (not all visitors are new)
     const clientsMonth = clientsDay * daysWeek * 4.3;
-    const newContactsMonth = Math.round(clientsMonth * CAPTURE_RATE);
+    const newClientsMonth = Math.round(clientsMonth * (1 - REPEAT_RATE));
+    const newContactsMonth = Math.round(newClientsMonth * CAPTURE_RATE);
     const totalContacts = newContactsMonth * MONTHS;
 
-    // Messages month 3 (sending to full base)
+    // Suggested birthdays — auto-update slider if user hasn't touched it
+    const suggestedBdays = calcSuggestedBdays(totalContacts);
+    document.getElementById('bday-hint').textContent = 'Sugerido: ~' + suggestedBdays + ' cumpleanos/mes';
+    if (!bdayManual) {
+      const bdaySlider = document.getElementById('bdays');
+      bdaySlider.value = Math.min(suggestedBdays, parseInt(bdaySlider.max));
+      document.getElementById('bdays-val').textContent = bdaySlider.value;
+    }
+
+    const bdayMsgs = parseInt(document.getElementById('bdays').value);
+    document.getElementById('bdays-val').textContent = bdayMsgs;
+
+    // Messages month 3
     const promoMsgs = totalContacts * promos;
     const reactMsgs = totalContacts * reacts;
-    const bdayMsgs = Math.round(totalContacts * BDAY_RATE); // auto
-    const totalMsgs = promoMsgs + reactMsgs + bdayMsgs;
 
     // WhatsApp costs split
     const waCostPromoReact = (promoMsgs + reactMsgs) * WA_COST_PER_MSG;
     const waCostBday = bdayMsgs * WA_COST_PER_MSG;
     const waCostTotal = waCostPromoReact + waCostBday;
 
-    // Returns (each channel has its own rate)
+    // Returns
     const returnsPromo = Math.round(totalContacts * promos * RETURN_RATE_PROMO);
     const returnsReact = Math.round(totalContacts * reacts * RETURN_RATE_REACT);
     const returnsBday = Math.round(bdayMsgs * BDAY_RETURN_RATE);
