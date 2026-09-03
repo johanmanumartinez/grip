@@ -52,485 +52,268 @@
     z-index: 1;
   }
 
-  /* --- HEADER --- */
-  .logo-wrap {
-    text-align: center;
-    padding: 16px 0 8px;
-  }
-  .logo-wrap img {
-    width: 120px;
-    filter: drop-shadow(0 0 20px rgba(45,122,246,0.15));
-  }
+  .logo-wrap { text-align: center; padding: 16px 0 8px; }
+  .logo-wrap img { width: 120px; filter: drop-shadow(0 0 20px rgba(45,122,246,0.15)); }
 
-  .page-header {
-    text-align: center;
-    margin-bottom: 28px;
-  }
+  .page-header { text-align: center; margin-bottom: 28px; }
   .page-header .tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--electric);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--electric);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
     text-shadow: 0 0 10px rgba(45,122,246,0.3);
   }
-  .page-header h1 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 8px;
-  }
+  .page-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; }
   .page-header h1 span { color: var(--electric); }
-  .page-header p {
-    font-size: 14px;
-    color: var(--steel);
-    line-height: 1.6;
-  }
+  .page-header p { font-size: 14px; color: var(--steel); line-height: 1.6; }
 
-  /* --- SECTION --- */
   .section-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--electric);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 14px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--electric);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px;
     text-shadow: 0 0 8px rgba(45,122,246,0.2);
   }
 
-  /* --- INPUT CARD --- */
+  /* INPUT CARD */
   .input-card {
     background: linear-gradient(135deg, rgba(20,20,31,0.8), rgba(14,14,22,0.9));
-    border: 1px solid rgba(45,122,246,0.1);
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 14px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s ease;
+    border: 1px solid rgba(45,122,246,0.1); border-radius: 14px; padding: 20px;
+    margin-bottom: 14px; position: relative; overflow: hidden; transition: border-color 0.3s ease;
   }
   .input-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
     background: linear-gradient(90deg, transparent, rgba(45,122,246,0.15), transparent);
   }
   .input-card:hover { border-color: rgba(45,122,246,0.2); }
-
-  .input-card .input-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-  .input-card .input-desc {
-    font-size: 11px;
-    color: var(--steel);
-    margin-bottom: 12px;
-  }
-
-  .input-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
+  .input-card .input-label { font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+  .input-card .input-desc { font-size: 11px; color: var(--steel); margin-bottom: 12px; }
+  .input-row { display: flex; align-items: center; gap: 14px; }
   .slider-wrap { flex: 1; }
 
   input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 6px;
-    border-radius: 3px;
-    background: var(--grid);
-    outline: none;
-    cursor: pointer;
+    -webkit-appearance: none; appearance: none; width: 100%; height: 6px;
+    border-radius: 3px; background: var(--grid); outline: none; cursor: pointer;
   }
   input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--electric), #4A90FF);
-    border: 2px solid var(--void);
-    box-shadow: 0 0 12px rgba(45,122,246,0.3);
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
+    -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--electric), #4A90FF); border: 2px solid var(--void);
+    box-shadow: 0 0 12px rgba(45,122,246,0.3); cursor: pointer; transition: box-shadow 0.3s ease;
   }
-  input[type="range"]::-webkit-slider-thumb:hover {
-    box-shadow: 0 0 20px rgba(45,122,246,0.5);
-  }
+  input[type="range"]::-webkit-slider-thumb:hover { box-shadow: 0 0 20px rgba(45,122,246,0.5); }
   input[type="range"]::-moz-range-thumb {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--electric), #4A90FF);
-    border: 2px solid var(--void);
-    box-shadow: 0 0 12px rgba(45,122,246,0.3);
-    cursor: pointer;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--electric), #4A90FF); border: 2px solid var(--void);
+    box-shadow: 0 0 12px rgba(45,122,246,0.3); cursor: pointer;
   }
 
   .slider-value {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--white);
-    min-width: 70px;
-    text-align: right;
-    text-shadow: 0 0 10px rgba(255,255,255,0.05);
+    font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700;
+    color: var(--white); min-width: 70px; text-align: right;
   }
-  .slider-value .unit {
-    font-size: 12px;
-    color: var(--steel);
-    font-weight: 500;
-  }
+  .slider-value .unit { font-size: 12px; color: var(--steel); font-weight: 500; }
 
-  /* --- DIVIDER --- */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--grid), transparent);
-    margin: 24px 0;
-  }
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--grid), transparent); margin: 24px 0; }
 
-  /* --- SCENARIO TABS --- */
-  .scenario-tabs {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
-  }
+  /* SCENARIO TABS */
+  .scenario-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
   .scenario-tab {
-    flex: 1;
-    padding: 10px 8px;
-    border-radius: 10px;
-    border: 1px solid var(--grid);
-    background: rgba(14,14,22,0.6);
-    color: var(--steel);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-align: center;
-    cursor: pointer;
+    flex: 1; padding: 10px 8px; border-radius: 10px; border: 1px solid var(--grid);
+    background: rgba(14,14,22,0.6); color: var(--steel);
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; text-align: center; cursor: pointer;
     transition: all 0.3s ease;
   }
-  .scenario-tab:hover {
-    border-color: rgba(45,122,246,0.2);
-    color: var(--white);
+  .scenario-tab:hover { border-color: rgba(45,122,246,0.2); color: var(--white); }
+  .scenario-tab.active-pessimist { border-color: var(--amber); color: var(--amber); background: rgba(245,158,11,0.08); }
+  .scenario-tab.active-standard { border-color: var(--electric); color: var(--electric); background: rgba(45,122,246,0.08); }
+  .scenario-tab.active-optimist { border-color: var(--circuit-green); color: var(--circuit-green); background: rgba(52,211,153,0.08); }
+
+  /* MONTH TABS */
+  .month-tabs { display: flex; gap: 6px; margin-bottom: 20px; }
+  .month-tab {
+    flex: 1; padding: 8px 4px; border-radius: 8px; border: 1px solid var(--grid);
+    background: rgba(14,14,22,0.6); color: var(--steel);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    text-align: center; cursor: pointer; transition: all 0.3s ease;
   }
-  .scenario-tab.active-pessimist {
-    border-color: var(--amber);
-    color: var(--amber);
-    background: rgba(245,158,11,0.08);
-    box-shadow: 0 0 15px rgba(245,158,11,0.08);
-  }
-  .scenario-tab.active-standard {
-    border-color: var(--electric);
-    color: var(--electric);
-    background: rgba(45,122,246,0.08);
-    box-shadow: 0 0 15px rgba(45,122,246,0.08);
-  }
-  .scenario-tab.active-optimist {
-    border-color: var(--circuit-green);
-    color: var(--circuit-green);
-    background: rgba(52,211,153,0.08);
-    box-shadow: 0 0 15px rgba(52,211,153,0.08);
+  .month-tab:hover { border-color: rgba(45,122,246,0.2); color: var(--white); }
+  .month-tab.active {
+    border-color: var(--electric); color: var(--electric);
+    background: rgba(45,122,246,0.08); box-shadow: 0 0 12px rgba(45,122,246,0.08);
   }
 
-  /* --- EXPLANATION CARD --- */
+  /* EXPLAIN CARD */
   .explain-card {
     background: linear-gradient(135deg, rgba(20,20,31,0.7), rgba(14,14,22,0.85));
-    border: 1px solid rgba(45,122,246,0.08);
-    border-radius: 14px;
-    padding: 18px;
-    margin-bottom: 14px;
+    border: 1px solid rgba(45,122,246,0.08); border-radius: 14px; padding: 18px; margin-bottom: 14px;
   }
   .explain-card .explain-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--electric);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--electric);
+    letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px;
   }
   .explain-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 6px 0;
-    font-size: 12px;
-    border-bottom: 1px solid rgba(30,30,46,0.4);
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 6px 0; font-size: 12px; border-bottom: 1px solid rgba(30,30,46,0.4);
   }
   .explain-row:last-child { border-bottom: none; }
-  .explain-row .el {
-    color: var(--steel);
-    flex: 1;
-    line-height: 1.5;
-  }
+  .explain-row .el { color: var(--steel); flex: 1; line-height: 1.5; }
   .explain-row .ev {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 600;
-    color: var(--white);
-    font-size: 12px;
-    text-align: right;
-    min-width: 90px;
-    line-height: 1.5;
+    font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--white);
+    font-size: 12px; text-align: right; min-width: 90px; line-height: 1.5;
   }
   .explain-row .ev.green { color: var(--circuit-green); }
   .explain-row .ev.blue { color: var(--electric); }
   .explain-row .ev.amber { color: var(--amber); }
-
-  .explain-row.subtotal {
-    border-top: 1px solid var(--grid);
-    margin-top: 4px;
-    padding-top: 10px;
-  }
+  .explain-row.subtotal { border-top: 1px solid var(--grid); margin-top: 4px; padding-top: 10px; }
   .explain-row.subtotal .el { color: var(--white); font-weight: 500; }
-
-  .explain-note {
-    font-size: 10px;
-    color: #555;
-    margin-top: 8px;
-    line-height: 1.5;
-    font-style: italic;
-  }
+  .explain-note { font-size: 10px; color: #555; margin-top: 8px; line-height: 1.5; font-style: italic; }
 
   .rate-badge {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: 600;
-    margin-left: 4px;
+    display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px;
+    padding: 2px 6px; border-radius: 4px; font-weight: 600; margin-left: 4px;
   }
   .rate-badge.pessimist { background: rgba(245,158,11,0.12); color: var(--amber); }
   .rate-badge.standard { background: rgba(45,122,246,0.12); color: var(--electric); }
   .rate-badge.optimist { background: rgba(52,211,153,0.12); color: var(--circuit-green); }
 
-  /* --- RESULTS --- */
-  .results-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 14px;
+  /* TOOLTIP */
+  .has-tip {
+    position: relative; cursor: help;
+    border-bottom: 1px dashed rgba(138,143,163,0.3);
   }
+  .has-tip .tip-box {
+    display: none; position: absolute; bottom: calc(100% + 8px); left: 50%;
+    transform: translateX(-50%); width: 280px; padding: 12px 14px;
+    background: #1a1a2e; border: 1px solid rgba(45,122,246,0.2); border-radius: 10px;
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 400;
+    color: var(--steel); line-height: 1.6; z-index: 100;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    pointer-events: none;
+  }
+  .has-tip .tip-box::after {
+    content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    border: 6px solid transparent; border-top-color: rgba(45,122,246,0.2);
+  }
+  .has-tip:hover .tip-box, .has-tip:focus .tip-box { display: block; }
+  .tip-box strong { color: var(--white); font-weight: 600; }
+  .tip-box .tip-formula {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--electric);
+    margin-top: 6px; padding: 6px 8px; background: rgba(45,122,246,0.06); border-radius: 6px;
+  }
+
+  /* RESULTS */
+  .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
 
   .result-card {
     background: linear-gradient(135deg, rgba(20,20,31,0.85), rgba(14,14,22,0.95));
-    border: 1px solid rgba(45,122,246,0.08);
-    border-radius: 14px;
-    padding: 18px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+    border: 1px solid rgba(45,122,246,0.08); border-radius: 14px; padding: 18px;
+    position: relative; overflow: visible; transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
   }
   .result-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
     background: linear-gradient(90deg, transparent, rgba(45,122,246,0.12), transparent);
   }
-  .result-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(45,122,246,0.15);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  }
-
+  .result-card:hover { transform: translateY(-2px); border-color: rgba(45,122,246,0.15); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
   .result-card .result-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: var(--electric);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    text-shadow: 0 0 6px rgba(45,122,246,0.2);
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--electric);
+    letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px;
   }
   .result-card .result-value {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--white);
-    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 700; color: var(--white);
   }
-  .result-card .result-sub {
-    font-size: 11px;
-    color: var(--steel);
-    margin-top: 4px;
-  }
+  .result-card .result-sub { font-size: 11px; color: var(--steel); margin-top: 4px; }
 
-  .result-card.green .result-value { color: var(--circuit-green); text-shadow: 0 0 15px rgba(52,211,153,0.2); }
+  .result-card.green .result-value { color: var(--circuit-green); }
   .result-card.green { border-color: rgba(52,211,153,0.15); }
-  .result-card.green::before { background: linear-gradient(90deg, transparent, rgba(52,211,153,0.2), transparent); }
-
-  .result-card.blue .result-value { color: var(--electric); text-shadow: 0 0 15px rgba(45,122,246,0.3); }
-
+  .result-card.blue .result-value { color: var(--electric); }
   .result-card.danger .result-value { color: var(--steel); }
 
-  /* --- ROI HERO --- */
+  /* ROI HERO */
   .roi-hero {
     background: linear-gradient(135deg, rgba(20,20,31,0.9), rgba(10,10,15,0.95));
-    border: 1px solid rgba(52,211,153,0.15);
-    border-radius: 16px;
-    padding: 28px;
-    text-align: center;
-    margin: 20px 0;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(52,211,153,0.03);
+    border: 1px solid rgba(52,211,153,0.15); border-radius: 16px; padding: 28px;
+    text-align: center; margin: 20px 0; position: relative; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
   }
   .roi-hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
     background: linear-gradient(90deg, transparent, rgba(52,211,153,0.3), transparent);
   }
-  .roi-hero::after {
-    content: '';
-    position: absolute;
-    top: -60px; left: 50%;
-    transform: translateX(-50%);
-    width: 200px; height: 120px;
-    background: radial-gradient(ellipse, rgba(52,211,153,0.06) 0%, transparent 70%);
-    pointer-events: none;
-  }
   .roi-hero .roi-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--circuit-green);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    text-shadow: 0 0 10px rgba(52,211,153,0.3);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--circuit-green);
+    letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px;
   }
   .roi-hero .roi-value {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 56px;
-    font-weight: 700;
-    color: var(--circuit-green);
-    text-shadow: 0 0 30px rgba(52,211,153,0.2);
-    line-height: 1;
-    margin-bottom: 6px;
-    position: relative;
-    z-index: 1;
+    font-family: 'Space Grotesk', sans-serif; font-size: 56px; font-weight: 700;
+    color: var(--circuit-green); text-shadow: 0 0 30px rgba(52,211,153,0.2); line-height: 1; margin-bottom: 6px;
   }
-  .roi-hero .roi-sub {
-    font-size: 14px;
-    color: var(--steel);
-    position: relative;
-    z-index: 1;
-  }
-  .roi-hero .roi-sub strong {
-    color: var(--white);
-    font-weight: 600;
-  }
+  .roi-hero .roi-sub { font-size: 14px; color: var(--steel); }
+  .roi-hero .roi-sub strong { color: var(--white); font-weight: 600; }
 
-  /* --- COMPARISON BAR --- */
-  .comparison {
-    margin: 20px 0;
-  }
-  .comparison .comp-label {
-    font-size: 12px;
-    color: var(--steel);
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: space-between;
-  }
+  /* COMPARISON BAR */
+  .comparison { margin: 20px 0; }
+  .comparison .comp-label { font-size: 12px; color: var(--steel); margin-bottom: 8px; display: flex; justify-content: space-between; }
   .comp-bar-wrap {
-    background: var(--onyx);
-    border-radius: 8px;
-    height: 36px;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--grid);
-    margin-bottom: 6px;
+    background: var(--onyx); border-radius: 8px; height: 36px; position: relative;
+    overflow: hidden; border: 1px solid var(--grid); margin-bottom: 6px;
   }
   .comp-bar {
-    height: 100%;
-    border-radius: 7px;
-    display: flex;
-    align-items: center;
-    padding: 0 12px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 600;
-    color: #FFF;
+    height: 100%; border-radius: 7px; display: flex; align-items: center; padding: 0 12px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: #FFF;
     transition: width 0.6s cubic-bezier(0.23,1,0.32,1);
-    position: relative;
   }
-  .comp-bar.invest {
-    background: linear-gradient(90deg, rgba(138,143,163,0.3), rgba(138,143,163,0.15));
-    border: 1px solid rgba(138,143,163,0.2);
-  }
-  .comp-bar.revenue {
-    background: linear-gradient(90deg, rgba(52,211,153,0.3), rgba(52,211,153,0.15));
-    border: 1px solid rgba(52,211,153,0.3);
-    box-shadow: 0 0 20px rgba(52,211,153,0.08);
-  }
+  .comp-bar.invest { background: linear-gradient(90deg, rgba(138,143,163,0.3), rgba(138,143,163,0.15)); border: 1px solid rgba(138,143,163,0.2); }
+  .comp-bar.revenue { background: linear-gradient(90deg, rgba(52,211,153,0.3), rgba(52,211,153,0.15)); border: 1px solid rgba(52,211,153,0.3); }
 
-  /* --- PITCH LINE --- */
+  /* PITCH */
   .pitch {
     background: linear-gradient(135deg, rgba(20,20,31,0.9), rgba(10,10,15,0.95));
-    border: 1px solid rgba(45,122,246,0.12);
-    border-left: 3px solid var(--electric);
-    border-radius: 12px;
-    padding: 20px;
-    margin: 20px 0;
-    box-shadow: -4px 0 20px rgba(45,122,246,0.05);
+    border: 1px solid rgba(45,122,246,0.12); border-left: 3px solid var(--electric);
+    border-radius: 12px; padding: 20px; margin: 20px 0;
   }
-  .pitch p {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--white);
-    line-height: 1.5;
-    margin: 0;
-  }
+  .pitch p { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: var(--white); line-height: 1.5; margin: 0; }
   .pitch p span { color: var(--electric); }
   .pitch p .green { color: var(--circuit-green); }
 
-  /* --- FOOTER --- */
-  .powered {
-    text-align: center;
-    padding: 30px 0 10px;
-  }
-  .powered span {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: #333;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
+  .powered { text-align: center; padding: 30px 0 10px; }
+  .powered span { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #333; letter-spacing: 2px; text-transform: uppercase; }
+  .disclaimer { font-size: 10px; color: #444; text-align: center; margin-top: 12px; line-height: 1.6; }
 
-  .disclaimer {
-    font-size: 10px;
-    color: #444;
-    text-align: center;
-    margin-top: 12px;
-    line-height: 1.6;
+  /* TIMELINE */
+  .timeline-card {
+    background: linear-gradient(135deg, rgba(20,20,31,0.7), rgba(14,14,22,0.85));
+    border: 1px solid rgba(45,122,246,0.08); border-radius: 14px; padding: 18px; margin-bottom: 14px;
+    overflow-x: auto;
   }
+  .timeline-table {
+    width: 100%; border-collapse: collapse; font-size: 11px;
+  }
+  .timeline-table th {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--electric);
+    letter-spacing: 1px; text-transform: uppercase; padding: 6px 8px; text-align: right;
+    border-bottom: 1px solid var(--grid);
+  }
+  .timeline-table th:first-child { text-align: left; }
+  .timeline-table td {
+    padding: 6px 8px; text-align: right; color: var(--steel); border-bottom: 1px solid rgba(30,30,46,0.3);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  }
+  .timeline-table td:first-child { text-align: left; font-family: 'Inter', sans-serif; color: var(--steel); }
+  .timeline-table td.highlight { color: var(--white); font-weight: 600; }
+  .timeline-table td.green { color: var(--circuit-green); font-weight: 600; }
+  .timeline-table td.amber { color: var(--amber); }
+  .timeline-table tr.total-row td { border-top: 1px solid var(--grid); color: var(--white); font-weight: 600; }
+  .timeline-table tr.total-row td.green { color: var(--circuit-green); }
+  .timeline-table .col-active { background: rgba(45,122,246,0.04); }
 </style>
 </head>
 <body>
 
 <div class="container">
 
-  <div class="logo-wrap">
-    <img src="logo_clean.png" alt="Grip">
-  </div>
+  <div class="logo-wrap"><img src="logo_clean.png" alt="Grip"></div>
 
   <div class="page-header">
     <div class="tag">[calculadora roi]</div>
-    <h1>Cuanto <span>ganas</span> con Grip?</h1>
-    <p>Ajusta los datos de tu negocio y mira el retorno real, con numeros transparentes.</p>
+    <h1>¿Cuánto <span>ganas</span> con Grip?</h1>
+    <p>Ajusta los datos de tu negocio y mira el retorno real, con números transparentes.</p>
   </div>
 
   <!-- INPUTS -->
@@ -540,9 +323,7 @@
     <div class="input-label">Ticket promedio por visita</div>
     <div class="input-desc">Lo que gasta un cliente en promedio</div>
     <div class="input-row">
-      <div class="slider-wrap">
-        <input type="range" id="ticket" min="3" max="100" value="15" oninput="calc()">
-      </div>
+      <div class="slider-wrap"><input type="range" id="ticket" min="3" max="100" value="15" oninput="calc()"></div>
       <div class="slider-value">$<span id="ticket-val">15</span></div>
     </div>
   </div>
@@ -551,19 +332,15 @@
     <div class="input-label">Clientes por dia</div>
     <div class="input-desc">Promedio de personas que entran al local (nuevos + repetidos)</div>
     <div class="input-row">
-      <div class="slider-wrap">
-        <input type="range" id="clients" min="5" max="200" value="40" oninput="calc()">
-      </div>
+      <div class="slider-wrap"><input type="range" id="clients" min="5" max="200" value="40" oninput="calc()"></div>
       <div class="slider-value"><span id="clients-val">40</span></div>
     </div>
   </div>
 
   <div class="input-card">
-    <div class="input-label">Dias abierto por semana</div>
+    <div class="input-label">Días abierto por semana</div>
     <div class="input-row">
-      <div class="slider-wrap">
-        <input type="range" id="days" min="3" max="7" value="6" oninput="calc()">
-      </div>
+      <div class="slider-wrap"><input type="range" id="days" min="3" max="7" value="6" oninput="calc()"></div>
       <div class="slider-value"><span id="days-val">6</span> <span class="unit">dias</span></div>
     </div>
   </div>
@@ -572,92 +349,117 @@
 
   <div class="input-card">
     <div class="input-label">Promociones por mes</div>
-    <div class="input-desc">Ofertas, 2x1, dias especiales — se envian a toda la base</div>
+    <div class="input-desc">Ofertas, 2x1, días especiales — se envían a toda la base</div>
     <div class="input-row">
-      <div class="slider-wrap">
-        <input type="range" id="promos" min="0" max="8" value="3" oninput="calc()">
-      </div>
+      <div class="slider-wrap"><input type="range" id="promos" min="0" max="8" value="3" oninput="calc()"></div>
       <div class="slider-value"><span id="promos-val">3</span> <span class="unit">envios</span></div>
     </div>
   </div>
 
   <div class="input-card">
     <div class="input-label">Reactivaciones por mes</div>
-    <div class="input-desc">Campanas al segmento inactivo (+30 dias sin volver) — no a toda la base</div>
+    <div class="input-desc">Campañas al segmento inactivo (+30 días sin volver) — no a toda la base</div>
     <div class="input-row">
-      <div class="slider-wrap">
-        <input type="range" id="reacts" min="0" max="4" value="1" oninput="calc()">
-      </div>
+      <div class="slider-wrap"><input type="range" id="reacts" min="0" max="4" value="1" oninput="calc()"></div>
       <div class="slider-value"><span id="reacts-val">1</span> <span class="unit">envios</span></div>
     </div>
+  </div>
+
+  <div class="input-card">
+    <div class="input-label">Cumpleaños por mes</div>
+    <div class="input-desc">Estimado según tu base — ajústalo si quieres</div>
+    <div class="input-row">
+      <div class="slider-wrap"><input type="range" id="bdays" min="0" max="80" value="5" oninput="onBdayInput()"></div>
+      <div class="slider-value"><span id="bdays-val">5</span> <span class="unit">envios</span></div>
+    </div>
+    <div class="input-desc" style="margin-top:8px; margin-bottom:0; color: var(--electric); font-size:10px;" id="bday-hint">Sugerido: ~5 cumpleaños/mes</div>
   </div>
 
   <div class="input-card">
     <div class="input-label">Costo del incentivo / regalo</div>
     <div class="input-desc">Postre, bebida, descuento — lo que "regalas" para que vuelvan. Se aplica a cada cliente que vuelve.</div>
     <div class="input-row">
-      <div class="slider-wrap">
-        <input type="range" id="gift" min="0" max="20" value="3" step="0.5" oninput="calc()">
-      </div>
+      <div class="slider-wrap"><input type="range" id="gift" min="0" max="20" value="3" step="0.5" oninput="calc()"></div>
       <div class="slider-value">$<span id="gift-val">3</span></div>
     </div>
-  </div>
-
-  <div class="input-card">
-    <div class="input-label">Cumpleanos por mes</div>
-    <div class="input-desc">Estimado segun tu base — ajustalo si quieres</div>
-    <div class="input-row">
-      <div class="slider-wrap">
-        <input type="range" id="bdays" min="0" max="80" value="5" oninput="onBdayInput()">
-      </div>
-      <div class="slider-value"><span id="bdays-val">5</span> <span class="unit">envios</span></div>
-    </div>
-    <div class="input-desc" style="margin-top:8px; margin-bottom:0; color: var(--electric); font-size:10px;" id="bday-hint">Sugerido: ~5 cumpleanos/mes</div>
   </div>
 
   <div class="divider"></div>
 
   <!-- SCENARIO -->
   <div class="section-label">[escenario]</div>
-
   <div class="scenario-tabs">
     <div class="scenario-tab" id="tab-pessimist" onclick="setScenario('pessimist')">Pesimista</div>
-    <div class="scenario-tab active-standard" id="tab-standard" onclick="setScenario('standard')">Estandar</div>
+    <div class="scenario-tab active-standard" id="tab-standard" onclick="setScenario('standard')">Estándar</div>
     <div class="scenario-tab" id="tab-optimist" onclick="setScenario('optimist')">Optimista</div>
   </div>
 
-  <!-- FUNNEL: CONTACTS -->
-  <div class="section-label">[como se calculan tus contactos]</div>
+  <!-- MONTH SELECTOR -->
+  <div class="section-label">[proyección a]</div>
+  <div class="month-tabs">
+    <div class="month-tab" id="mtab-1" onclick="setMonth(1)">Mes 1</div>
+    <div class="month-tab" id="mtab-2" onclick="setMonth(2)">Mes 2</div>
+    <div class="month-tab active" id="mtab-3" onclick="setMonth(3)">Mes 3</div>
+    <div class="month-tab" id="mtab-6" onclick="setMonth(6)">Mes 6</div>
+    <div class="month-tab" id="mtab-12" onclick="setMonth(12)">Mes 12</div>
+  </div>
+
+  <!-- FUNNEL -->
+  <div class="section-label">[cómo se calculan tus contactos]</div>
 
   <div class="explain-card" id="funnel-card">
-    <div class="explain-title">Funnel de captacion — mes 3</div>
+    <div class="explain-title">Funnel de captación — <span id="funnel-month-label">mes 3</span></div>
+
     <div class="explain-row">
-      <span class="el">Visitas totales/mes</span>
+      <span class="el has-tip" tabindex="0">Visitas totales/mes
+        <span class="tip-box"><strong>Visitas totales</strong><br>Todos los que entran al local en un mes, incluyendo los que ya vinieron antes.
+          <div class="tip-formula" id="tip-visits">40 clientes/día x 6 días x 4.3 semanas = 1,032</div>
+        </span>
+      </span>
       <span class="ev" id="f-visits">1,032</span>
     </div>
+
     <div class="explain-row">
-      <span class="el">Visitantes repetidos <span class="rate-badge standard" id="badge-repeat">40%</span></span>
+      <span class="el has-tip" tabindex="0">Visitantes repetidos <span class="rate-badge standard" id="badge-repeat">40%</span>
+        <span class="tip-box"><strong>Repetidos</strong><br>Clientes que ya vinieron en semanas anteriores. No son nuevos, no se les pide datos otra vez.
+          <div class="tip-formula" id="tip-repeats">1,032 visitas x 40% = 413 ya vinieron</div>
+        </span>
+      </span>
       <span class="ev" id="f-repeats">-413</span>
     </div>
+
     <div class="explain-row">
-      <span class="el">Visitantes nuevos/mes</span>
+      <span class="el has-tip" tabindex="0">Visitantes nuevos/mes
+        <span class="tip-box"><strong>Nuevos</strong><br>Personas que visitan el local por primera vez (o que aún no se han registrado).
+          <div class="tip-formula" id="tip-new">1,032 - 413 = 619 nuevos</div>
+        </span>
+      </span>
       <span class="ev blue" id="f-new">619</span>
     </div>
+
     <div class="explain-row">
-      <span class="el">Tasa de registro <span class="rate-badge standard" id="badge-capture">30%</span></span>
+      <span class="el has-tip" tabindex="0">Tasa de registro <span class="rate-badge standard" id="badge-capture">30%</span>
+        <span class="tip-box"><strong>Registro</strong><br>De los nuevos, cuántos tocan el NFC o escanean el QR y dejan sus datos. Depende de la ubicación del stand, el incentivo ofrecido y si el equipo lo promueve.
+          <div class="tip-formula" id="tip-reg">619 nuevos x 30% = 186 se registran</div>
+        </span>
+      </span>
       <span class="ev" id="f-registered">186</span>
     </div>
+
     <div class="explain-row subtotal">
-      <span class="el">Contactos acumulados (3 meses)</span>
+      <span class="el has-tip" tabindex="0">Contactos acumulados
+        <span class="tip-box"><strong>Base acumulada</strong><br>Los contactos se suman mes a mes. Cada mes entran nuevos registros. La base crece de forma lineal.
+          <div class="tip-formula" id="tip-total">186 registros/mes x 3 meses = 557 contactos</div>
+        </span>
+      </span>
       <span class="ev blue" id="f-total">557</span>
     </div>
-    <div class="explain-note" id="f-note">
-      De 40 clientes/dia, ~40% ya vinieron antes. De los 24 nuevos, ~30% dejan sus datos via NFC/QR. En 3 meses acumulas 557 contactos unicos.
-    </div>
+
+    <div class="explain-note" id="f-note"></div>
   </div>
 
   <!-- RESULTS GRID -->
-  <div class="section-label">[proyeccion mes 3]</div>
+  <div class="section-label">[resumen — <span id="results-month-label">mes 3</span>]</div>
 
   <div class="results-grid">
     <div class="result-card blue">
@@ -683,124 +485,137 @@
   </div>
 
   <!-- RETURN BREAKDOWN -->
-  <div class="section-label">[quienes vuelven y por que]</div>
+  <div class="section-label">[quiénes vuelven y por qué]</div>
 
   <div class="explain-card">
-    <div class="explain-title">Retorno por canal</div>
+    <div class="explain-title">Retorno por canal — <span id="ret-month-label">mes 3</span></div>
 
     <div class="explain-row">
-      <span class="el">Promos enviadas (base x envios)</span>
+      <span class="el has-tip" tabindex="0">Promos enviadas
+        <span class="tip-box"><strong>Envíos de promo</strong><br>Cada promo se envía a toda la base de contactos. Si tienes 557 contactos y envias 3 promos/mes, son 1,671 conversaciones.
+          <div class="tip-formula" id="tip-promo-sent">557 contactos x 3 promos = 1,671</div>
+        </span>
+      </span>
       <span class="ev" id="ret-promo-sent">1,671</span>
     </div>
     <div class="explain-row">
-      <span class="el">Tasa de retorno promos <span class="rate-badge standard" id="badge-ret-promo">20%</span></span>
+      <span class="el has-tip" tabindex="0">Vuelven por promos <span class="rate-badge standard" id="badge-ret-promo">20%</span>
+        <span class="tip-box"><strong>Retorno por promo</strong><br>De todas las promos recibidas, este % se traduce en una visita real. Depende de qué tan atractivo es el incentivo (2x1, postre gratis, etc.).
+          <div class="tip-formula" id="tip-promo-back">1,671 promos x 20% = 334 vuelven</div>
+        </span>
+      </span>
       <span class="ev green" id="ret-promo-back">334</span>
     </div>
 
     <div class="explain-row" style="margin-top:8px">
-      <span class="el">Base inactiva (+30 dias) <span class="rate-badge standard" id="badge-inactive">55%</span></span>
+      <span class="el has-tip" tabindex="0">Base inactiva (+30 días) <span class="rate-badge standard" id="badge-inactive">55%</span>
+        <span class="tip-box"><strong>Segmento inactivo</strong><br>Contactos que no han vuelto al local en más de 30 días. Solo a ellos les enviamos reactivación — no tiene sentido enviarla a alguien que vino ayer.
+          <div class="tip-formula" id="tip-inactive">557 contactos x 55% = 306 inactivos</div>
+        </span>
+      </span>
       <span class="ev" id="ret-inactive-base">306</span>
     </div>
     <div class="explain-row">
-      <span class="el">Reactivaciones enviadas (inactivos x envios)</span>
+      <span class="el has-tip" tabindex="0">Reactivaciones enviadas
+        <span class="tip-box"><strong>Envíos de reactivación</strong><br>Cada reactivación se envía SOLO al segmento inactivo, no a toda la base.
+          <div class="tip-formula" id="tip-react-sent">306 inactivos x 1 envío = 306</div>
+        </span>
+      </span>
       <span class="ev" id="ret-react-sent">306</span>
     </div>
     <div class="explain-row">
-      <span class="el">Tasa de retorno react. <span class="rate-badge standard" id="badge-ret-react">10%</span></span>
+      <span class="el has-tip" tabindex="0">Vuelven por reactivación <span class="rate-badge standard" id="badge-ret-react">10%</span>
+        <span class="tip-box"><strong>Retorno por reactivación</strong><br>Estos clientes ya estaban frios. La tasa es menor que promos porque llevan tiempo sin venir. Aún así, cada uno que vuelve genera ticket.
+          <div class="tip-formula" id="tip-react-back">306 enviadas x 10% = 31 vuelven</div>
+        </span>
+      </span>
       <span class="ev green" id="ret-react-back">31</span>
     </div>
 
     <div class="explain-row" style="margin-top:8px">
-      <span class="el">Cumpleanos enviados</span>
+      <span class="el">Cumpleaños enviados</span>
       <span class="ev" id="ret-bday-sent">5</span>
     </div>
     <div class="explain-row">
-      <span class="el">Tasa de retorno cumple. <span class="rate-badge standard" id="badge-ret-bday">35%</span></span>
+      <span class="el has-tip" tabindex="0">Vuelven por cumpleaños <span class="rate-badge standard" id="badge-ret-bday">35%</span>
+        <span class="tip-box"><strong>Retorno por cumpleaños</strong><br>El mensaje de cumpleaños es personal y emocional. Tiene la tasa de retorno más alta porque el cliente se siente valorado. "Te regalamos una bebida por tu día" es difícil de ignorar.
+          <div class="tip-formula" id="tip-bday-back">5 cumples x 35% = 2 vuelven</div>
+        </span>
+      </span>
       <span class="ev green" id="ret-bday-back">2</span>
     </div>
 
     <div class="explain-row subtotal">
       <span class="el">Total clientes que vuelven</span>
-      <span class="ev green" id="ret-total">392</span>
+      <span class="ev green" id="ret-total">367</span>
     </div>
     <div class="explain-row subtotal">
       <span class="el">Ingreso bruto (vuelven x ticket)</span>
-      <span class="ev" id="ret-revenue-gross">$5,880</span>
+      <span class="ev" id="ret-revenue-gross">$5,505</span>
     </div>
     <div class="explain-row">
-      <span class="el">Costo incentivos (vuelven x regalo)</span>
-      <span class="ev amber" id="ret-gift-cost">-$1,176</span>
+      <span class="el has-tip" tabindex="0">Costo incentivos (vuelven x regalo)
+        <span class="tip-box"><strong>Lo que regalas</strong><br>Cada cliente que vuelve recibe el incentivo prometido (postre, bebida, descuento). Es un costo real que se descuenta.
+          <div class="tip-formula" id="tip-gift">367 vuelven x $3 regalo = $1,101</div>
+        </span>
+      </span>
+      <span class="ev amber" id="ret-gift-cost">-$1,101</span>
     </div>
     <div class="explain-row subtotal">
       <span class="el">Ingreso neto por retorno</span>
-      <span class="ev green" id="ret-revenue">$4,704</span>
+      <span class="ev green" id="ret-revenue">$4,404</span>
     </div>
-    <div class="explain-note" id="ret-note">
-      No todos los que reciben tu mensaje vuelven. En escenario estandar: 20% vuelven por promos (buen incentivo), 10% por reactivacion (mas frio), 35% por cumpleanos (personal, alta conversion).
-    </div>
+    <div class="explain-note" id="ret-note"></div>
   </div>
 
   <!-- WHATSAPP COSTS -->
   <div class="section-label">[costo whatsapp detallado]</div>
 
   <div class="explain-card">
-    <div class="explain-title">Conversaciones WhatsApp API — mes 3</div>
+    <div class="explain-title">Conversaciónes WhatsApp API — <span id="wa-month-label">mes 3</span></div>
 
     <div class="explain-row">
-      <span class="el">Promos: <span id="wa-promo-conv">1,671</span> conversaciones</span>
+      <span class="el">Promos: <span id="wa-promo-conv">1,671</span> conv.</span>
       <span class="ev" id="wa-promo-cost">$143</span>
     </div>
     <div class="explain-row">
-      <span class="el">Reactivacion: <span id="wa-react-conv">557</span> conversaciones</span>
-      <span class="ev" id="wa-react-cost">$48</span>
+      <span class="el">Reactivación: <span id="wa-react-conv">306</span> conv.</span>
+      <span class="ev" id="wa-react-cost">$26</span>
     </div>
     <div class="explain-row">
-      <span class="el">Cumpleanos: <span id="wa-bday-conv">5</span> conversaciones</span>
+      <span class="el">Cumpleaños: <span id="wa-bday-conv">5</span> conv.</span>
       <span class="ev" id="wa-bday-cost">$0</span>
     </div>
-
     <div class="explain-row subtotal">
       <span class="el">Total conversaciones</span>
-      <span class="ev" id="wa-total-conv">2,233</span>
+      <span class="ev" id="wa-total-conv">1,982</span>
     </div>
     <div class="explain-row subtotal">
       <span class="el">Costo total WhatsApp</span>
-      <span class="ev" id="wa-total-cost">$192</span>
+      <span class="ev" id="wa-total-cost">$170</span>
     </div>
-
     <div class="explain-note">
-      WhatsApp Business API cobra por conversacion, no por mensaje. Cada envio (promo, cumpleanos, reactivacion) abre 1 conversacion de 24 horas. Dentro de esa ventana puedes enviar texto + imagen + lo que necesites, sin costo extra. Tarifa marketing: $0.0858/conversacion (Rest of Latin America, Meta 2026).
+      Meta cobra $0.0858 por conversación de marketing (tarifa "Rest of Latin America", 2026). Cada conversación = ventana de 24 horas. Dentro puedes enviar texto + imagen + botones sin costo extra. Un envío de promo con imagen + texto + CTA = 1 conversación = $0.0858.
     </div>
   </div>
 
   <!-- ROI HERO -->
   <div class="roi-hero">
-    <div class="roi-label">Retorno de inversion</div>
+    <div class="roi-label">Retorno de inversión — <span id="roi-month-label">mes 3</span></div>
     <div class="roi-value" id="r-roi">5.3x</div>
     <div class="roi-sub">Por cada <strong>$1</strong> que inviertes, recuperas <strong>$<span id="r-roi-dollar">5.30</span></strong></div>
   </div>
 
   <!-- COMPARISON BARS -->
   <div class="comparison">
-    <div class="comp-label">
-      <span>Inversion total</span>
-      <span id="comp-invest-label">$242</span>
-    </div>
-    <div class="comp-bar-wrap">
-      <div class="comp-bar invest" id="bar-invest" style="width: 15%;"></div>
-    </div>
-
-    <div class="comp-label" style="margin-top: 10px;">
-      <span>Ingreso extra generado</span>
-      <span id="comp-revenue-label" style="color: var(--circuit-green);">$5,880</span>
-    </div>
-    <div class="comp-bar-wrap">
-      <div class="comp-bar revenue" id="bar-revenue" style="width: 80%;"></div>
-    </div>
+    <div class="comp-label"><span>Inversión total</span><span id="comp-invest-label">$242</span></div>
+    <div class="comp-bar-wrap"><div class="comp-bar invest" id="bar-invest" style="width: 15%;"></div></div>
+    <div class="comp-label" style="margin-top: 10px;"><span>Ingreso extra generado</span><span id="comp-revenue-label" style="color: var(--circuit-green);">$5,880</span></div>
+    <div class="comp-bar-wrap"><div class="comp-bar revenue" id="bar-revenue" style="width: 80%;"></div></div>
   </div>
 
   <!-- FINAL BREAKDOWN -->
-  <div class="section-label">[resumen de inversion]</div>
+  <div class="section-label">[resumen de inversión]</div>
 
   <div class="explain-card">
     <div class="explain-row">
@@ -809,76 +624,75 @@
     </div>
     <div class="explain-row">
       <span class="el">WhatsApp API (lo pagas directo a Meta)</span>
-      <span class="ev" id="b-wa">$192</span>
+      <span class="ev" id="b-wa">$170</span>
     </div>
     <div class="explain-row">
-      <span class="el">Incentivos regalados (postres, bebidas, etc.)</span>
-      <span class="ev" id="b-gifts">$1,176</span>
+      <span class="el">Incentivos regalados</span>
+      <span class="ev" id="b-gifts">$1,101</span>
     </div>
     <div class="explain-row subtotal">
-      <span class="el">Total inversion mensual</span>
-      <span class="ev" id="b-total-inv">$242</span>
+      <span class="el">Total inversión</span>
+      <span class="ev" id="b-total-inv">$1,321</span>
     </div>
     <div class="explain-row subtotal">
-      <span class="el">Ingreso extra generado</span>
-      <span class="ev green" id="b-revenue">$5,880</span>
+      <span class="el">Ingreso bruto generado</span>
+      <span class="ev green" id="b-revenue">$5,505</span>
     </div>
     <div class="explain-row subtotal">
       <span class="el">Ganancia neta</span>
-      <span class="ev green" id="b-profit" style="font-size:15px">+$5,638</span>
+      <span class="ev green" id="b-profit" style="font-size:15px">+$4,184</span>
     </div>
   </div>
 
   <!-- PITCH -->
   <div class="pitch">
-    <p>"Inviertes <span id="pitch-invest">$242</span>, recuperas <span class="green" id="pitch-revenue">$5,880</span>. Eso es <span id="pitch-roi">5.3x</span> tu inversion."</p>
+    <p>"Inviertes <span id="pitch-invest">$1,321</span>, recuperas <span class="green" id="pitch-revenue">$5,505</span>. Eso es <span id="pitch-roi">4.2x</span> tu inversión."</p>
+  </div>
+
+  <!-- TIMELINE TABLE -->
+  <div class="section-label">[evolución mes a mes]</div>
+
+  <div class="timeline-card">
+    <table class="timeline-table" id="timeline-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>M1</th>
+          <th>M2</th>
+          <th>M3</th>
+          <th>M6</th>
+          <th>M12</th>
+        </tr>
+      </thead>
+      <tbody id="timeline-body"></tbody>
+    </table>
   </div>
 
   <!-- SCENARIO RATES TABLE -->
   <div class="section-label">[tasas por escenario]</div>
 
   <div class="explain-card">
-    <div class="explain-title">De donde salen los porcentajes</div>
-
-    <div class="explain-row">
-      <span class="el">Visitantes repetidos</span>
-      <span class="ev"><span class="rate-badge pessimist">50%</span> <span class="rate-badge standard">40%</span> <span class="rate-badge optimist">30%</span></span>
-    </div>
-    <div class="explain-row">
-      <span class="el">Registro via NFC/QR</span>
-      <span class="ev"><span class="rate-badge pessimist">15%</span> <span class="rate-badge standard">30%</span> <span class="rate-badge optimist">45%</span></span>
-    </div>
-    <div class="explain-row">
-      <span class="el">Base inactiva (+30 dias)</span>
-      <span class="ev"><span class="rate-badge pessimist">70%</span> <span class="rate-badge standard">55%</span> <span class="rate-badge optimist">40%</span></span>
-    </div>
-    <div class="explain-row">
-      <span class="el">Retorno por promo</span>
-      <span class="ev"><span class="rate-badge pessimist">8%</span> <span class="rate-badge standard">20%</span> <span class="rate-badge optimist">35%</span></span>
-    </div>
-    <div class="explain-row">
-      <span class="el">Retorno por reactivacion</span>
-      <span class="ev"><span class="rate-badge pessimist">5%</span> <span class="rate-badge standard">10%</span> <span class="rate-badge optimist">18%</span></span>
-    </div>
-    <div class="explain-row">
-      <span class="el">Retorno por cumpleanos</span>
-      <span class="ev"><span class="rate-badge pessimist">15%</span> <span class="rate-badge standard">35%</span> <span class="rate-badge optimist">50%</span></span>
-    </div>
-
+    <div class="explain-title">De dónde salen los porcentajes</div>
+    <div class="explain-row"><span class="el">Visitantes repetidos</span><span class="ev"><span class="rate-badge pessimist">50%</span> <span class="rate-badge standard">40%</span> <span class="rate-badge optimist">30%</span></span></div>
+    <div class="explain-row"><span class="el">Registro vía NFC/QR</span><span class="ev"><span class="rate-badge pessimist">15%</span> <span class="rate-badge standard">30%</span> <span class="rate-badge optimist">45%</span></span></div>
+    <div class="explain-row"><span class="el">Base inactiva (+30 días)</span><span class="ev"><span class="rate-badge pessimist">70%</span> <span class="rate-badge standard">55%</span> <span class="rate-badge optimist">40%</span></span></div>
+    <div class="explain-row"><span class="el">Retorno por promo</span><span class="ev"><span class="rate-badge pessimist">8%</span> <span class="rate-badge standard">20%</span> <span class="rate-badge optimist">35%</span></span></div>
+    <div class="explain-row"><span class="el">Retorno por reactivación</span><span class="ev"><span class="rate-badge pessimist">5%</span> <span class="rate-badge standard">10%</span> <span class="rate-badge optimist">18%</span></span></div>
+    <div class="explain-row"><span class="el">Retorno por cumpleaños</span><span class="ev"><span class="rate-badge pessimist">15%</span> <span class="rate-badge standard">35%</span> <span class="rate-badge optimist">50%</span></span></div>
     <div class="explain-note">
-      Pesimista: stand mal ubicado, poco incentivo, equipo no empuja. Estandar: stand visible, buen gancho (2x1, postre gratis), equipo colabora. Optimista: stand en punto de pago, gancho irresistible, equipo entrenado, marca fuerte en la zona.
+      Pesimista: stand mal ubicado, poco incentivo, equipo no empuja. Estándar: stand visible, buen gancho (2x1, postre gratis), equipo colabora. Optimista: stand en punto de pago, gancho irresistible, equipo entrenado, marca fuerte en la zona.
     </div>
   </div>
 
   <div class="explain-card">
     <div class="explain-title">Sobre el costo de WhatsApp</div>
     <div class="explain-note" style="color: var(--steel); margin-top: 0;">
-      Meta cobra $0.0858 por conversacion de marketing (tarifa "Rest of Latin America", vigente 2026). Cada conversacion es una ventana de 24 horas. Dentro de esa ventana puedes enviar multiples mensajes (texto, imagen, video, botones) sin costo adicional. Esto significa que un envio de promo con imagen + texto + boton de CTA = 1 sola conversacion = $0.0858. El costo no se multiplica por cantidad de mensajes dentro de la misma ventana.
+      Meta cobra $0.0858 por conversación de marketing (tarifa "Rest of Latin America", vigente 2026). Cada conversación es una ventana de 24 horas. Dentro puedes enviar múltiples mensajes (texto, imagen, video, botones) sin costo adicional. Promo con imagen + texto + botón = 1 conversación = $0.0858.
     </div>
   </div>
 
   <div class="disclaimer">
-    Todos los numeros son estimaciones basadas en tasas de mercado para WhatsApp marketing en LATAM y negocios de hospitality/servicios. Resultados reales dependen de la calidad del incentivo, ubicacion del stand, y ejecucion del equipo.
+    Todos los números son estimaciones basadas en tasas de mercado para WhatsApp marketing en LATAM y negocios de hospitality/servicios. Resultados reales dependen de la calidad del incentivo, ubicación del stand, y ejecución del equipo.
   </div>
 
   <div class="powered"><span>Powered by Grip</span></div>
@@ -886,70 +700,45 @@
 </div>
 
 <script>
-  // --- CONSTANTS ---
   const GRIP_MONTHLY = 50;
-  const WA_CONV_COST = 0.0858; // per marketing conversation, Rest of Latin America
-  const MONTHS = 3;
+  const WA_CONV_COST = 0.0858;
 
-  // --- SCENARIO RATES ---
   const SCENARIOS = {
     pessimist: {
-      repeat: 0.50,      // 50% de visitas son repetidas
-      capture: 0.15,     // 15% de nuevos se registran
-      inactive: 0.70,    // 70% de la base no ha vuelto en 30+ dias
-      retPromo: 0.08,    // 8% vuelven por promo
-      retReact: 0.05,    // 5% vuelven por reactivacion
-      retBday: 0.15,     // 15% vuelven por cumpleanos
-      label: 'Pesimista',
-      class: 'pessimist',
-      color: 'amber',
-      desc: 'Stand mal ubicado, poco incentivo, equipo no empuja.'
+      repeat: 0.50, capture: 0.15, inactive: 0.70,
+      retPromo: 0.08, retReact: 0.05, retBday: 0.15,
+      label: 'Pesimista', desc: 'Stand mal ubicado, poco incentivo, equipo no empuja.'
     },
     standard: {
-      repeat: 0.40,
-      capture: 0.30,
-      inactive: 0.55,    // 55% de la base inactiva
-      retPromo: 0.20,
-      retReact: 0.10,
-      retBday: 0.35,
-      label: 'Estandar',
-      class: 'standard',
-      color: 'blue',
-      desc: 'Stand visible, buen gancho, equipo colabora.'
+      repeat: 0.40, capture: 0.30, inactive: 0.55,
+      retPromo: 0.20, retReact: 0.10, retBday: 0.35,
+      label: 'Estándar', desc: 'Stand visible, buen gancho, equipo colabora.'
     },
     optimist: {
-      repeat: 0.30,
-      capture: 0.45,
-      inactive: 0.40,    // 40% de la base inactiva (muchos vuelven solos)
-      retPromo: 0.35,
-      retReact: 0.18,
-      retBday: 0.50,
-      label: 'Optimista',
-      class: 'optimist',
-      color: 'green',
-      desc: 'Stand en punto de pago, gancho irresistible, equipo entrenado.'
+      repeat: 0.30, capture: 0.45, inactive: 0.40,
+      retPromo: 0.35, retReact: 0.18, retBday: 0.50,
+      label: 'Optimista', desc: 'Stand en punto de pago, gancho irresistible, equipo entrenado.'
     }
   };
 
   let currentScenario = 'standard';
+  let currentMonth = 3;
   let bdayManual = false;
 
-  function onBdayInput() {
-    bdayManual = true;
-    calc();
-  }
+  function onBdayInput() { bdayManual = true; calc(); }
 
   function setScenario(s) {
     currentScenario = s;
+    document.querySelectorAll('.scenario-tab').forEach(t => t.className = 'scenario-tab');
+    document.getElementById('tab-' + s).classList.add('active-' + s);
+    bdayManual = false;
+    calc();
+  }
 
-    // Update tabs
-    document.querySelectorAll('.scenario-tab').forEach(t => {
-      t.className = 'scenario-tab';
-    });
-    const tab = document.getElementById('tab-' + s);
-    tab.classList.add('active-' + s);
-
-    // Reset bday manual so it recalculates with new rates
+  function setMonth(m) {
+    currentMonth = m;
+    document.querySelectorAll('.month-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('mtab-' + m).classList.add('active');
     bdayManual = false;
     calc();
   }
@@ -957,15 +746,52 @@
   function pct(n) { return Math.round(n * 100) + '%'; }
   function fmt(n) { return Math.round(n).toLocaleString(); }
 
-  function updateBadge(id, scenarioKey) {
-    const el = document.getElementById(id);
-    const sc = SCENARIOS[currentScenario];
-    el.className = 'rate-badge ' + currentScenario;
+  // Calculate metrics for a given month
+  function calcMonth(M, S, ticket, clientsDay, daysWeek, promos, reacts, giftCost, bdayOverride) {
+    const visitsMonth = Math.round(clientsDay * daysWeek * 4.3);
+    const repeats = Math.round(visitsMonth * S.repeat);
+    const newVisitors = visitsMonth - repeats;
+    const registered = Math.round(newVisitors * S.capture);
+    const totalContacts = registered * M;
+
+    const suggestedBdays = Math.round(totalContacts / 12);
+    const bdays = bdayOverride !== null ? bdayOverride : suggestedBdays;
+
+    const promoSent = totalContacts * promos;
+    const inactiveContacts = Math.round(totalContacts * S.inactive);
+    const reactSent = inactiveContacts * reacts;
+    const bdaySent = bdays;
+
+    const promoBack = Math.round(promoSent * S.retPromo);
+    const reactBack = Math.round(reactSent * S.retReact);
+    const bdayBack = Math.round(bdaySent * S.retBday);
+    const totalReturn = promoBack + reactBack + bdayBack;
+
+    const revenueGross = totalReturn * ticket;
+    const totalGiftCost = totalReturn * giftCost;
+
+    const waPromoConv = promoSent;
+    const waReactConv = reactSent;
+    const waBdayConv = bdaySent;
+    const waTotalConv = waPromoConv + waReactConv + waBdayConv;
+    const waTotalCost = waTotalConv * WA_CONV_COST;
+
+    const totalInvestment = GRIP_MONTHLY + waTotalCost + totalGiftCost;
+    const profit = revenueGross - totalInvestment;
+    const roi = totalInvestment > 0 ? revenueGross / totalInvestment : 0;
+
+    return {
+      M, visitsMonth, repeats, newVisitors, registered, totalContacts, suggestedBdays, bdays,
+      promoSent, inactiveContacts, reactSent, bdaySent,
+      promoBack, reactBack, bdayBack, totalReturn,
+      revenueGross, totalGiftCost,
+      waPromoConv, waReactConv, waBdayConv, waTotalConv, waTotalCost,
+      totalInvestment, profit, roi
+    };
   }
 
   function calc() {
     const S = SCENARIOS[currentScenario];
-
     const ticket = parseInt(document.getElementById('ticket').value);
     const clientsDay = parseInt(document.getElementById('clients').value);
     const daysWeek = parseInt(document.getElementById('days').value);
@@ -981,70 +807,77 @@
     document.getElementById('reacts-val').textContent = reacts;
     document.getElementById('gift-val').textContent = giftCost % 1 === 0 ? giftCost : giftCost.toFixed(1);
 
+    // Calc for current month
+    const R = calcMonth(currentMonth, S, ticket, clientsDay, daysWeek, promos, reacts, giftCost, null);
+
+    // Update bday slider
+    document.getElementById('bday-hint').textContent = 'Sugerido: ~' + R.suggestedBdays + ' cumpleaños/mes';
+    if (!bdayManual) {
+      const bdaySlider = document.getElementById('bdays');
+      bdaySlider.value = Math.min(R.suggestedBdays, parseInt(bdaySlider.max));
+    }
+    const bdays = parseInt(document.getElementById('bdays').value);
+    document.getElementById('bdays-val').textContent = bdays;
+
+    // Recalc with actual bday value
+    const D = calcMonth(currentMonth, S, ticket, clientsDay, daysWeek, promos, reacts, giftCost, bdays);
+
+    const ml = currentMonth === 1 ? 'mes 1' : 'mes ' + currentMonth;
+
+    // Month labels
+    document.getElementById('funnel-month-label').textContent = ml;
+    document.getElementById('results-month-label').textContent = ml;
+    document.getElementById('ret-month-label').textContent = ml;
+    document.getElementById('wa-month-label').textContent = ml;
+    document.getElementById('roi-month-label').textContent = ml;
+
     // === FUNNEL ===
-    const visitsMonth = Math.round(clientsDay * daysWeek * 4.3);
-    const repeats = Math.round(visitsMonth * S.repeat);
-    const newVisitors = visitsMonth - repeats;
-    const registered = Math.round(newVisitors * S.capture);
-    const totalContacts = registered * MONTHS;
+    document.getElementById('f-visits').textContent = fmt(D.visitsMonth);
+    document.getElementById('f-repeats').textContent = '-' + fmt(D.repeats);
+    document.getElementById('f-new').textContent = fmt(D.newVisitors);
+    document.getElementById('f-registered').textContent = fmt(D.registered);
+    document.getElementById('f-total').textContent = fmt(D.totalContacts);
 
-    document.getElementById('f-visits').textContent = fmt(visitsMonth);
-    document.getElementById('f-repeats').textContent = '-' + fmt(repeats);
-    document.getElementById('f-new').textContent = fmt(newVisitors);
-    document.getElementById('f-registered').textContent = fmt(registered);
-    document.getElementById('f-total').textContent = fmt(totalContacts);
-
-    // Update badges
+    // Badges
     document.getElementById('badge-repeat').textContent = pct(S.repeat);
     document.getElementById('badge-repeat').className = 'rate-badge ' + currentScenario;
     document.getElementById('badge-capture').textContent = pct(S.capture);
     document.getElementById('badge-capture').className = 'rate-badge ' + currentScenario;
 
+    // Tooltip formulas
+    document.getElementById('tip-visits').textContent = clientsDay + ' clientes/día x ' + daysWeek + ' días x 4.3 semanas = ' + fmt(D.visitsMonth);
+    document.getElementById('tip-repeats').textContent = fmt(D.visitsMonth) + ' visitas x ' + pct(S.repeat) + ' = ' + fmt(D.repeats) + ' ya vinieron';
+    document.getElementById('tip-new').textContent = fmt(D.visitsMonth) + ' - ' + fmt(D.repeats) + ' = ' + fmt(D.newVisitors) + ' nuevos';
+    document.getElementById('tip-reg').textContent = fmt(D.newVisitors) + ' nuevos x ' + pct(S.capture) + ' = ' + fmt(D.registered) + ' se registran';
+    document.getElementById('tip-total').textContent = fmt(D.registered) + ' registros/mes x ' + currentMonth + ' meses = ' + fmt(D.totalContacts) + ' contactos';
+
     // Funnel note
     const newPerDay = Math.round(clientsDay * (1 - S.repeat));
-    const regPerDay = Math.round(newPerDay * S.capture);
     document.getElementById('f-note').textContent =
-      'De ' + clientsDay + ' clientes/dia, ~' + pct(S.repeat) + ' ya vinieron antes. De los ' +
-      newPerDay + ' nuevos, ~' + pct(S.capture) + ' dejan sus datos via NFC/QR. En 3 meses acumulas ' +
-      fmt(totalContacts) + ' contactos unicos.';
+      'De ' + clientsDay + ' clientes/día, ~' + pct(S.repeat) + ' ya vinieron antes. De los ' +
+      newPerDay + ' nuevos, ~' + pct(S.capture) + ' dejan sus datos vía NFC/QR. En ' +
+      currentMonth + (currentMonth === 1 ? ' mes' : ' meses') + ' acumulas ' + fmt(D.totalContacts) + ' contactos únicos.';
 
-    // Suggested birthdays
-    const suggestedBdays = Math.round(totalContacts / 12);
-    document.getElementById('bday-hint').textContent = 'Sugerido: ~' + suggestedBdays + ' cumpleanos/mes';
-    if (!bdayManual) {
-      const bdaySlider = document.getElementById('bdays');
-      bdaySlider.value = Math.min(suggestedBdays, parseInt(bdaySlider.max));
-    }
-    const bdays = parseInt(document.getElementById('bdays').value);
-    document.getElementById('bdays-val').textContent = bdays;
+    // === RESULTS GRID ===
+    document.getElementById('r-contacts').textContent = fmt(D.totalContacts);
+    document.getElementById('r-return').textContent = fmt(D.totalReturn);
+    document.getElementById('r-revenue').textContent = '$' + fmt(D.revenueGross);
+    document.getElementById('r-wacost').textContent = '$' + fmt(D.waTotalCost);
 
     // === RETURNS ===
-    const promoSent = totalContacts * promos; // promos van a toda la base
-    const inactiveContacts = Math.round(totalContacts * S.inactive); // solo los que no han vuelto en 30+ dias
-    const reactSent = inactiveContacts * reacts; // reactivacion solo al segmento inactivo
-    const bdaySent = bdays;
-
-    const promoBack = Math.round(promoSent * S.retPromo);
-    const reactBack = Math.round(reactSent * S.retReact);
-    const bdayBack = Math.round(bdaySent * S.retBday);
-    const totalReturn = promoBack + reactBack + bdayBack;
-    const revenueGross = totalReturn * ticket;
-    const totalGiftCost = totalReturn * giftCost;
-    const revenue = revenueGross - totalGiftCost;
-
-    document.getElementById('ret-promo-sent').textContent = fmt(promoSent);
-    document.getElementById('ret-promo-back').textContent = fmt(promoBack);
-    document.getElementById('ret-inactive-base').textContent = fmt(inactiveContacts);
+    document.getElementById('ret-promo-sent').textContent = fmt(D.promoSent);
+    document.getElementById('ret-promo-back').textContent = fmt(D.promoBack);
+    document.getElementById('ret-inactive-base').textContent = fmt(D.inactiveContacts);
     document.getElementById('badge-inactive').textContent = pct(S.inactive);
     document.getElementById('badge-inactive').className = 'rate-badge ' + currentScenario;
-    document.getElementById('ret-react-sent').textContent = fmt(reactSent);
-    document.getElementById('ret-react-back').textContent = fmt(reactBack);
-    document.getElementById('ret-bday-sent').textContent = fmt(bdaySent);
-    document.getElementById('ret-bday-back').textContent = fmt(bdayBack);
-    document.getElementById('ret-total').textContent = fmt(totalReturn);
-    document.getElementById('ret-revenue-gross').textContent = '$' + fmt(revenueGross);
-    document.getElementById('ret-gift-cost').textContent = '-$' + fmt(totalGiftCost);
-    document.getElementById('ret-revenue').textContent = '$' + fmt(revenue);
+    document.getElementById('ret-react-sent').textContent = fmt(D.reactSent);
+    document.getElementById('ret-react-back').textContent = fmt(D.reactBack);
+    document.getElementById('ret-bday-sent').textContent = fmt(D.bdaySent);
+    document.getElementById('ret-bday-back').textContent = fmt(D.bdayBack);
+    document.getElementById('ret-total').textContent = fmt(D.totalReturn);
+    document.getElementById('ret-revenue-gross').textContent = '$' + fmt(D.revenueGross);
+    document.getElementById('ret-gift-cost').textContent = '-$' + fmt(D.totalGiftCost);
+    document.getElementById('ret-revenue').textContent = '$' + fmt(D.revenueGross - D.totalGiftCost);
 
     // Return badges
     document.getElementById('badge-ret-promo').textContent = pct(S.retPromo);
@@ -1054,72 +887,117 @@
     document.getElementById('badge-ret-bday').textContent = pct(S.retBday);
     document.getElementById('badge-ret-bday').className = 'rate-badge ' + currentScenario;
 
+    // Return tooltip formulas
+    document.getElementById('tip-promo-sent').textContent = fmt(D.totalContacts) + ' contactos x ' + promos + ' promos = ' + fmt(D.promoSent);
+    document.getElementById('tip-promo-back').textContent = fmt(D.promoSent) + ' promos x ' + pct(S.retPromo) + ' = ' + fmt(D.promoBack) + ' vuelven';
+    document.getElementById('tip-inactive').textContent = fmt(D.totalContacts) + ' contactos x ' + pct(S.inactive) + ' = ' + fmt(D.inactiveContacts) + ' inactivos';
+    document.getElementById('tip-react-sent').textContent = fmt(D.inactiveContacts) + ' inactivos x ' + reacts + ' envío' + (reacts !== 1 ? 's' : '') + ' = ' + fmt(D.reactSent);
+    document.getElementById('tip-react-back').textContent = fmt(D.reactSent) + ' enviadas x ' + pct(S.retReact) + ' = ' + fmt(D.reactBack) + ' vuelven';
+    document.getElementById('tip-bday-back').textContent = bdays + ' cumples x ' + pct(S.retBday) + ' = ' + fmt(D.bdayBack) + ' vuelven';
+    document.getElementById('tip-gift').textContent = fmt(D.totalReturn) + ' vuelven x $' + giftCost + ' regalo = $' + fmt(D.totalGiftCost);
+
     // Return note
     document.getElementById('ret-note').textContent =
-      'No todos los que reciben tu mensaje vuelven. En escenario ' + S.label.toLowerCase() + ': ' +
-      pct(S.retPromo) + ' vuelven por promos, ' + pct(S.retReact) + ' por reactivacion, ' +
-      pct(S.retBday) + ' por cumpleanos. ' + S.desc;
+      'En escenario ' + S.label.toLowerCase() + ': ' + pct(S.retPromo) + ' vuelven por promos, ' +
+      pct(S.retReact) + ' por reactivación, ' + pct(S.retBday) + ' por cumpleaños. ' + S.desc;
 
-    // === WHATSAPP COSTS ===
-    const waPromoConv = promoSent;
-    const waReactConv = reactSent;
-    const waBdayConv = bdaySent;
-    const waTotalConv = waPromoConv + waReactConv + waBdayConv;
+    // === WHATSAPP ===
+    document.getElementById('wa-promo-conv').textContent = fmt(D.waPromoConv);
+    document.getElementById('wa-promo-cost').textContent = '$' + fmt(D.waPromoConv * WA_CONV_COST);
+    document.getElementById('wa-react-conv').textContent = fmt(D.waReactConv);
+    document.getElementById('wa-react-cost').textContent = '$' + fmt(D.waReactConv * WA_CONV_COST);
+    document.getElementById('wa-bday-conv').textContent = fmt(D.waBdayConv);
+    document.getElementById('wa-bday-cost').textContent = '$' + fmt(D.waBdayConv * WA_CONV_COST);
+    document.getElementById('wa-total-conv').textContent = fmt(D.waTotalConv);
+    document.getElementById('wa-total-cost').textContent = '$' + fmt(D.waTotalCost);
 
-    const waPromoCost = waPromoConv * WA_CONV_COST;
-    const waReactCost = waReactConv * WA_CONV_COST;
-    const waBdayCost = waBdayConv * WA_CONV_COST;
-    const waTotalCost = waPromoCost + waReactCost + waBdayCost;
+    // === ROI ===
+    document.getElementById('r-roi').textContent = D.roi.toFixed(1) + 'x';
+    document.getElementById('r-roi-dollar').textContent = D.roi.toFixed(2);
 
-    document.getElementById('wa-promo-conv').textContent = fmt(waPromoConv);
-    document.getElementById('wa-promo-cost').textContent = '$' + fmt(waPromoCost);
-    document.getElementById('wa-react-conv').textContent = fmt(waReactConv);
-    document.getElementById('wa-react-cost').textContent = '$' + fmt(waReactCost);
-    document.getElementById('wa-bday-conv').textContent = fmt(waBdayConv);
-    document.getElementById('wa-bday-cost').textContent = '$' + fmt(waBdayCost);
-    document.getElementById('wa-total-conv').textContent = fmt(waTotalConv);
-    document.getElementById('wa-total-cost').textContent = '$' + fmt(waTotalCost);
+    // === BARS ===
+    const maxVal = Math.max(D.revenueGross, D.totalInvestment);
+    document.getElementById('bar-invest').style.width = Math.max(5, (D.totalInvestment / maxVal) * 100) + '%';
+    document.getElementById('bar-revenue').style.width = Math.max(5, (D.revenueGross / maxVal) * 100) + '%';
+    document.getElementById('comp-invest-label').textContent = '$' + fmt(D.totalInvestment);
+    document.getElementById('comp-revenue-label').textContent = '$' + fmt(D.revenueGross);
 
-    // === TOTALS ===
-    const totalInvestment = GRIP_MONTHLY + waTotalCost + totalGiftCost;
-    const profit = revenueGross - totalInvestment;
-    const roi = totalInvestment > 0 ? revenue / totalInvestment : 0;
-
-    // Results grid
-    document.getElementById('r-contacts').textContent = fmt(totalContacts);
-    document.getElementById('r-return').textContent = fmt(totalReturn);
-    document.getElementById('r-revenue').textContent = '$' + fmt(revenueGross);
-    document.getElementById('r-wacost').textContent = '$' + fmt(waTotalCost);
-
-    // ROI
-    document.getElementById('r-roi').textContent = roi.toFixed(1) + 'x';
-    document.getElementById('r-roi-dollar').textContent = roi.toFixed(2);
-
-    // Bars
-    const maxVal = Math.max(revenueGross, totalInvestment);
-    const investPct = Math.max(5, (totalInvestment / maxVal) * 100);
-    const revenuePct = Math.max(5, (revenue / maxVal) * 100);
-    document.getElementById('bar-invest').style.width = investPct + '%';
-    document.getElementById('bar-revenue').style.width = revenuePct + '%';
-    document.getElementById('comp-invest-label').textContent = '$' + fmt(totalInvestment);
-    document.getElementById('comp-revenue-label').textContent = '$' + fmt(revenueGross);
-
-    // Final breakdown
+    // === FINAL BREAKDOWN ===
     document.getElementById('b-grip').textContent = '$' + GRIP_MONTHLY;
-    document.getElementById('b-wa').textContent = '$' + fmt(waTotalCost);
-    document.getElementById('b-gifts').textContent = '$' + fmt(totalGiftCost);
-    document.getElementById('b-total-inv').textContent = '$' + fmt(totalInvestment);
-    document.getElementById('b-revenue').textContent = '$' + fmt(revenueGross);
-    document.getElementById('b-profit').textContent = (profit >= 0 ? '+' : '') + '$' + fmt(profit);
-    document.getElementById('b-profit').style.color = profit >= 0 ? 'var(--circuit-green)' : 'var(--danger)';
+    document.getElementById('b-wa').textContent = '$' + fmt(D.waTotalCost);
+    document.getElementById('b-gifts').textContent = '$' + fmt(D.totalGiftCost);
+    document.getElementById('b-total-inv').textContent = '$' + fmt(D.totalInvestment);
+    document.getElementById('b-revenue').textContent = '$' + fmt(D.revenueGross);
+    document.getElementById('b-profit').textContent = (D.profit >= 0 ? '+' : '') + '$' + fmt(D.profit);
+    document.getElementById('b-profit').style.color = D.profit >= 0 ? 'var(--circuit-green)' : 'var(--danger)';
 
-    // Pitch
-    document.getElementById('pitch-invest').textContent = '$' + fmt(totalInvestment);
-    document.getElementById('pitch-revenue').textContent = '$' + fmt(revenueGross);
-    document.getElementById('pitch-roi').textContent = roi.toFixed(1) + 'x';
+    // === PITCH ===
+    document.getElementById('pitch-invest').textContent = '$' + fmt(D.totalInvestment);
+    document.getElementById('pitch-revenue').textContent = '$' + fmt(D.revenueGross);
+    document.getElementById('pitch-roi').textContent = D.roi.toFixed(1) + 'x';
+
+    // === TIMELINE TABLE ===
+    const months = [1, 2, 3, 6, 12];
+    const rows = [];
+    const data = {};
+    months.forEach(m => {
+      const bdayAuto = null; // auto for timeline
+      data[m] = calcMonth(m, S, ticket, clientsDay, daysWeek, promos, reacts, giftCost, bdayAuto);
+    });
+
+    function tRow(label, key, cls, prefix) {
+      prefix = prefix || '';
+      let html = '<tr><td>' + label + '</td>';
+      months.forEach(m => {
+        const val = data[m][key];
+        const isActive = m === currentMonth ? ' col-active' : '';
+        html += '<td class="' + (cls || '') + isActive + '">' + prefix + fmt(val) + '</td>';
+      });
+      html += '</tr>';
+      return html;
+    }
+
+    let tbody = '';
+    tbody += tRow('Contactos', 'totalContacts', 'highlight');
+    tbody += tRow('Clientes que vuelven', 'totalReturn', '');
+    tbody += tRow('Ingreso bruto', 'revenueGross', '', '$');
+    tbody += tRow('Costo WhatsApp', 'waTotalCost', '', '$');
+    tbody += tRow('Costo incentivos', 'totalGiftCost', '', '$');
+    tbody += tRow('Grip', 'M', '', '$'); // placeholder
+
+    // Total inv and profit as custom rows
+    tbody += '<tr class="total-row"><td>Total inversión</td>';
+    months.forEach(m => {
+      const isActive = m === currentMonth ? ' col-active' : '';
+      tbody += '<td class="' + isActive + '">$' + fmt(data[m].totalInvestment) + '</td>';
+    });
+    tbody += '</tr>';
+
+    tbody += '<tr class="total-row"><td>Ganancia neta</td>';
+    months.forEach(m => {
+      const isActive = m === currentMonth ? ' col-active' : '';
+      const p = data[m].profit;
+      tbody += '<td class="green' + isActive + '">' + (p >= 0 ? '+' : '') + '$' + fmt(p) + '</td>';
+    });
+    tbody += '</tr>';
+
+    tbody += '<tr class="total-row"><td>ROI</td>';
+    months.forEach(m => {
+      const isActive = m === currentMonth ? ' col-active' : '';
+      tbody += '<td class="green' + isActive + '">' + data[m].roi.toFixed(1) + 'x</td>';
+    });
+    tbody += '</tr>';
+
+    document.getElementById('timeline-body').innerHTML = tbody;
+
+    // Fix Grip row (it shows month number, replace with $50)
+    const gripRow = document.getElementById('timeline-body').children[5];
+    if (gripRow) {
+      const cells = gripRow.querySelectorAll('td');
+      cells.forEach((td, i) => { if (i > 0) td.textContent = '$50'; });
+    }
   }
 
-  // Init
   calc();
 </script>
 
