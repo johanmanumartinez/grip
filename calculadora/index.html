@@ -583,7 +583,7 @@
 
   <div class="input-card">
     <div class="input-label">Reactivaciones por mes</div>
-    <div class="input-desc">Mensajes a clientes que no vuelven hace +30 dias</div>
+    <div class="input-desc">Campanas al segmento inactivo (+30 dias sin volver) — no a toda la base</div>
     <div class="input-row">
       <div class="slider-wrap">
         <input type="range" id="reacts" min="0" max="4" value="1" oninput="calc()">
@@ -698,12 +698,16 @@
     </div>
 
     <div class="explain-row" style="margin-top:8px">
-      <span class="el">Reactivaciones enviadas</span>
-      <span class="ev" id="ret-react-sent">557</span>
+      <span class="el">Base inactiva (+30 dias) <span class="rate-badge standard" id="badge-inactive">55%</span></span>
+      <span class="ev" id="ret-inactive-base">306</span>
+    </div>
+    <div class="explain-row">
+      <span class="el">Reactivaciones enviadas (inactivos x envios)</span>
+      <span class="ev" id="ret-react-sent">306</span>
     </div>
     <div class="explain-row">
       <span class="el">Tasa de retorno react. <span class="rate-badge standard" id="badge-ret-react">10%</span></span>
-      <span class="ev green" id="ret-react-back">56</span>
+      <span class="ev green" id="ret-react-back">31</span>
     </div>
 
     <div class="explain-row" style="margin-top:8px">
@@ -845,6 +849,10 @@
       <span class="ev"><span class="rate-badge pessimist">15%</span> <span class="rate-badge standard">30%</span> <span class="rate-badge optimist">45%</span></span>
     </div>
     <div class="explain-row">
+      <span class="el">Base inactiva (+30 dias)</span>
+      <span class="ev"><span class="rate-badge pessimist">70%</span> <span class="rate-badge standard">55%</span> <span class="rate-badge optimist">40%</span></span>
+    </div>
+    <div class="explain-row">
       <span class="el">Retorno por promo</span>
       <span class="ev"><span class="rate-badge pessimist">8%</span> <span class="rate-badge standard">20%</span> <span class="rate-badge optimist">35%</span></span>
     </div>
@@ -886,11 +894,12 @@
   // --- SCENARIO RATES ---
   const SCENARIOS = {
     pessimist: {
-      repeat: 0.50,    // 50% de visitas son repetidas
-      capture: 0.15,   // 15% de nuevos se registran
-      retPromo: 0.08,  // 8% vuelven por promo
-      retReact: 0.05,  // 5% vuelven por reactivacion
-      retBday: 0.15,   // 15% vuelven por cumpleanos
+      repeat: 0.50,      // 50% de visitas son repetidas
+      capture: 0.15,     // 15% de nuevos se registran
+      inactive: 0.70,    // 70% de la base no ha vuelto en 30+ dias
+      retPromo: 0.08,    // 8% vuelven por promo
+      retReact: 0.05,    // 5% vuelven por reactivacion
+      retBday: 0.15,     // 15% vuelven por cumpleanos
       label: 'Pesimista',
       class: 'pessimist',
       color: 'amber',
@@ -899,6 +908,7 @@
     standard: {
       repeat: 0.40,
       capture: 0.30,
+      inactive: 0.55,    // 55% de la base inactiva
       retPromo: 0.20,
       retReact: 0.10,
       retBday: 0.35,
@@ -910,6 +920,7 @@
     optimist: {
       repeat: 0.30,
       capture: 0.45,
+      inactive: 0.40,    // 40% de la base inactiva (muchos vuelven solos)
       retPromo: 0.35,
       retReact: 0.18,
       retBday: 0.50,
@@ -1008,8 +1019,9 @@
     document.getElementById('bdays-val').textContent = bdays;
 
     // === RETURNS ===
-    const promoSent = totalContacts * promos;
-    const reactSent = totalContacts * reacts;
+    const promoSent = totalContacts * promos; // promos van a toda la base
+    const inactiveContacts = Math.round(totalContacts * S.inactive); // solo los que no han vuelto en 30+ dias
+    const reactSent = inactiveContacts * reacts; // reactivacion solo al segmento inactivo
     const bdaySent = bdays;
 
     const promoBack = Math.round(promoSent * S.retPromo);
@@ -1022,6 +1034,9 @@
 
     document.getElementById('ret-promo-sent').textContent = fmt(promoSent);
     document.getElementById('ret-promo-back').textContent = fmt(promoBack);
+    document.getElementById('ret-inactive-base').textContent = fmt(inactiveContacts);
+    document.getElementById('badge-inactive').textContent = pct(S.inactive);
+    document.getElementById('badge-inactive').className = 'rate-badge ' + currentScenario;
     document.getElementById('ret-react-sent').textContent = fmt(reactSent);
     document.getElementById('ret-react-back').textContent = fmt(reactBack);
     document.getElementById('ret-bday-sent').textContent = fmt(bdaySent);
